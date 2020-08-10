@@ -1,0 +1,44 @@
+@import url(//fonts.googleapis.com/css?family=Pacifico);
+
+.imageCard {
+	padding-top: 2%;
+	padding-bottom: 2%;
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+}
+
+.imageCard:hover {
+	opacity: 0.4;
+}
+
+.imageCardText {
+	font-family: 'Pacifico';
+	padding: 10px;
+	border-style: solid;
+}
+
+.imageCardImage {
+	width: 100%;
+}
+
+.galleryRow {
+	align-self: center;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: black;
+}
+
+.galleryContainer {
+	min-height: calc(100vh - 110px);
+	display: flex;
+}
+
+
+
+

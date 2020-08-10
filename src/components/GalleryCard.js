@@ -1,0 +1,74 @@
+import React from 'react';
+import {Row, Col, Nav, Modal, Button, Container} from 'react-bootstrap'
+import exhibitionStyle from '../css/Exhibitions.css'
+
+function GalleryCard(props) {
+		let image = require(`../img/${props.folder}/${props.photo}.jpg`)
+		let image2 = new Image()
+		image2.src = image
+		let vertical = false
+		if (image2.height <  image2.width) {
+			vertical = true
+		}
+
+		const [show, setShow] = React.useState(false);
+  		const handleClose = () => setShow(false);
+  		const handleShow = () => setShow(true);
+
+		return(
+			<>
+				<Col sm={props.small} lg={vertical ? 2 : 1} className="galleryCard">
+						<div  onClick={handleShow}>
+							<img 
+								src={image}
+								className="galleryCardImage"
+							/> 
+						</div>
+				</Col>
+
+				<Modal show={show} onHide={handleClose} dialogClassName="modal">
+			        <Modal.Header closeButton>
+			        	<Modal.Title>
+			        		Purchase Image
+			        	</Modal.Title>
+			        </Modal.Header>
+
+			        <Modal.Body>
+			        	<Row>
+				        	<Col sm={12} lg={8}>
+				        		<img 
+						        	src={image}
+						        	style={vertical ? {width: '100%'} : {width: '44.5%'}}
+					        	/>
+				        	</Col>
+
+				        	<Col sm={12} lg={4} className="purchase">
+				        		<p>Style: 
+				        			<select name="style" id="style" className="selectBox">
+				        				<option value="canvas">Canvas</option>
+				        				<option value="print">Print</option>
+				        			</select>
+				        		</p>
+
+				        		<p>Size: 
+				        			<select name="style" id="style" className="selectBox">
+				        				<option value="small">Small</option>
+				        				<option value="medium">Medium</option>
+				        				<option value="large">Large</option>
+				        			</select>
+				        		</p>
+
+				        		<Button >
+				        			Add to Basket
+				        		</Button>
+				        	</Col>
+			        	</Row>
+			        </Modal.Body>
+
+
+		      	</Modal>
+			</>
+		);
+}
+
+export default GalleryCard

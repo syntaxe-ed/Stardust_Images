@@ -1,0 +1,17 @@
+.contactContainer {
+	min-height: calc(100vh - 110px);
+	display: flex;
+}
+
+.contactRow {
+	align-self: center;
+}
+
+.contactImage {
+	width: 100%;
+	align-self: center;
+}
+
+.contactFormStyle {
+	align-self: center;
+}
