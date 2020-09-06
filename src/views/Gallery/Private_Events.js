@@ -12,7 +12,7 @@ class Private_Events extends React.Component{
 	}
 
 	async componentDidMount() {
-		axios.get('http://192.168.1.113:5000/gallery')
+		axios.get('http://192.168.1.206:5000/gallery')
 			.then(response => {
 				this.setState ({
 					photos: response.data
