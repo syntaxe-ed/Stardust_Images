@@ -1,6 +1,7 @@
 import React from 'react'
 import {Col, Row, Container} from 'react-bootstrap'
-import GalleryCard from '../../components/GalleryCard'
+import ComissionsStyle from '../../css/Events.css'
+import ImageCard from '../../components/ImageCard'
 import axios from 'axios'
 
 class Comissions extends React.Component{
@@ -24,16 +25,23 @@ class Comissions extends React.Component{
 	}
 
 	photosList() {
+		let text = ""
 		return this.state.photos.map(currentPhoto => {
 			if (currentPhoto.galleryTitle.toLowerCase() === "comissions"){
-				return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder="events/dancing" key={currentPhoto._id}/>
+				let ref = "/gallery/events/Comissions/" + currentPhoto.reference
+
+				if (currentPhoto.fileName === "Natural_World") {
+					text = "Natural World"
+				}
+
+				return <ImageCard small={12} large={4} reference={ref} photo={currentPhoto.fileName} text={text} folder="events/Exhibitions" key={currentPhoto._id}/>
 			}
 		})
 	}
 
 	render() {
 		return (
-			<Container fluid className="containerTest">
+			<Container fluid className="eventsContainer">
 				<Row>
 					{this.photosList()}
 				</Row>

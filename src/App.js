@@ -17,6 +17,7 @@ import Trampolining from './views/Gallery/Trampolining'
 import Exhibitions from './views/Gallery/Exhibitions'
 import Comissions from './views/Gallery/Comissions'
 import Private_Events from './views/Gallery/Private_Events'
+import Natural_World from './views/Gallery/NaturalWorld'
 import axios from 'axios'
 
 class App extends Component {
@@ -35,6 +36,7 @@ class App extends Component {
                     <Route exact path="/gallery/events/exhibitions" component={Exhibitions} />
                     <Route exact path="/gallery/events/comissions" component={Comissions} />
                     <Route exact path="/gallery/events/private_events" component={Private_Events} />
+                    <Route exact path="/gallery/events/exhibitions/Natural_World" component={Natural_World} />
                     <Route path="/about" component={About} />
                     <Route exct path="/gallery" component={Gallery} />
                     <Route path="/contact" component={Contact} />

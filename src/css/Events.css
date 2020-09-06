@@ -29,6 +29,6 @@ a:hover {
 	color: black;
 }
 
-.EventsContainer {
+.eventsContainer {
 	min-height: calc(100vh - 110px);
 }

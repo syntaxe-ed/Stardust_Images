@@ -1,8 +1,8 @@
 import React from 'react'
 import {Col, Row, Container} from 'react-bootstrap'
-import GalleryCard from '../../components/GalleryCard'
+import EventsStyle from '../../css/Events.css'
+import ImageCard from '../../components/ImageCard'
 import axios from 'axios'
-import exhibitionStyle from '../../css/Exhibitions.css'
 
 class Exhibitions extends React.Component{
 	constructor(props) {
@@ -25,17 +25,24 @@ class Exhibitions extends React.Component{
 	}
 
 	photosList() {
+		let text = ""
 		return this.state.photos.map(currentPhoto => {
 			if (currentPhoto.galleryTitle.toLowerCase() === "exhibitions"){
-				return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder="events/Exhibitions" key={currentPhoto._id}/>
+				let ref = "/gallery/events/Exhibitions/" + currentPhoto.reference
+
+				if (currentPhoto.fileName === "Natural_World") {
+					text = "Natural World"
+				}
+
+				return <ImageCard small={12} large={4} reference={ref} photo={currentPhoto.fileName} text={text} folder="events/Exhibitions" key={currentPhoto._id}/>
 			}
 		})
 	}
 
 	render() {
 		return (
-			<Container fluid className="exhibitionContainer">
-				<Row className="exhibitionRow">
+			<Container fluid className="eventsContainer">
+				<Row>
 					{this.photosList()}
 				</Row>
 			</Container>

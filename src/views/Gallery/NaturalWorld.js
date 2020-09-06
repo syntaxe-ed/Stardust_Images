@@ -1,10 +1,10 @@
 import React from 'react'
 import {Col, Row, Container} from 'react-bootstrap'
-import EventsStyle from '../../css/Events.css'
-import ImageCard from '../../components/ImageCard'
+import GalleryCard from '../../components/GalleryCard'
 import axios from 'axios'
+import exhibitionStyle from '../../css/Exhibitions.css'
 
-class Events extends React.Component{
+class NaturalWorld extends React.Component{
 	constructor(props) {
 		super(props)
 		this.state = {photos: []};
@@ -26,18 +26,16 @@ class Events extends React.Component{
 
 	photosList() {
 		return this.state.photos.map(currentPhoto => {
-			if (currentPhoto.galleryTitle.toLowerCase() === "events"){
-				let ref = "/gallery/events/" + currentPhoto.reference
-
-				return <ImageCard small={12} large={4} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder="events" key={currentPhoto._id}/>
+			if (currentPhoto.galleryTitle.toLowerCase() === "natural_world"){
+				return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder="events/Exhibitions/Natural_World" key={currentPhoto._id}/>
 			}
 		})
 	}
 
 	render() {
 		return (
-			<Container fluid className="eventsContainer">
-				<Row>
+			<Container fluid className="exhibitionContainer">
+				<Row className="exhibitionRow">
 					{this.photosList()}
 				</Row>
 			</Container>
@@ -45,4 +43,4 @@ class Events extends React.Component{
 	}
 }
 
-export default Events
+export default NaturalWorld

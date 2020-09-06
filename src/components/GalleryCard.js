@@ -5,11 +5,11 @@ import exhibitionStyle from '../css/Exhibitions.css'
 function GalleryCard(props) {
 		let image = require(`../img/${props.folder}/${props.photo}.jpg`)
 		let image2 = new Image()
-		image2.src = image
-		let vertical = false
-		if (image2.height <  image2.width) {
-			vertical = true
-		}
+        image2.src = image
+        let vertical = false
+        if (image2.height <  image2.width) {
+            vertical = true
+        }
 
 		const [show, setShow] = React.useState(false);
   		const handleClose = () => setShow(false);
