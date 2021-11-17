@@ -58,7 +58,9 @@ function GalleryCard(props) {
 				        			</select>
 				        		</p>
 
-				        		<Button >
+				        		<Button className="buy-button snipcart-add-item" data-item-id="1" data-item-price="200.00" data-item-url="/" data-item-name="Bluetit"
+								 data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print"
+								 data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+50.00]|Large">
 				        			Add to Basket
 				        		</Button>
 				        	</Col>

@@ -2,7 +2,9 @@
 
 # website specific
 /backend/.env
+/backend/node_modules
 /src/img
+.env
 
 # dependencies
 /node_modules
