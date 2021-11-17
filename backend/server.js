@@ -1,7 +1,9 @@
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const session = require('express-session');
+var session = require('express-session');
 
 require('dotenv').config();
 
@@ -29,6 +31,10 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }))
+
+app.get('/', function(req, res, next) {
+  console.log(req.session)
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

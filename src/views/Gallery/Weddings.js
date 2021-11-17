@@ -12,7 +12,11 @@ class Weddings extends React.Component{
 	}
 
 	async componentDidMount() {
+<<<<<<< HEAD
 		axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery`)
+=======
+		axios.get('http://192.168.1.206:5000/gallery')
+>>>>>>> b0f53d04a468b5a03bfd310813e67d57f7edef4a
 			.then(response => {
 				this.setState ({
 					photos: response.data
