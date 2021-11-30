@@ -12,11 +12,7 @@ class Comissions extends React.Component{
 	}
 
 	async componentDidMount() {
-<<<<<<< HEAD
-		axios.get('http://192.168.1.144:5000/gallery')
-=======
-		axios.get('http://192.168.1.206:5000/gallery')
->>>>>>> b0f53d04a468b5a03bfd310813e67d57f7edef4a
+		axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery`)
 			.then(response => {
 				this.setState ({
 					photos: response.data
