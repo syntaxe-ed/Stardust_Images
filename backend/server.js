@@ -21,20 +21,22 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
-const photosRouter = require ('./routes/photos');
-const emailRouter = require('./routes/email');
+const photosRouter = require('./routes/photos');
+//const emailRouter = require('./routes/email');
+const pagesRouter = require('./routes/pages');
 
 app.use('/gallery', photosRouter);
-app.use('/send', emailRouter);
-app.use(session({
-  secret: '2C44-4D44-WppQ38S',
-  resave: true,
-  saveUninitialized: true
-}))
+// app.use('/send', emailRouter);
+app.use('/pages', pagesRouter);
+// app.use(session({
+//   secret: '2C44-4D44-WppQ38S',
+//   resave: true,
+//   saveUninitialized: true
+// }))
 
-app.get('/', function(req, res, next) {
-  console.log(req.session)
-})
+// app.get('/', function(req, res, next) {
+//   console.log(req.session)
+// })
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

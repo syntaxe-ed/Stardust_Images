@@ -15,7 +15,8 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.9.25",
-    "nodemailer": "^6.4.10"
+    "nodemailer": "^6.4.10",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
