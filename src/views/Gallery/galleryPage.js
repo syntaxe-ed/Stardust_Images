@@ -1,10 +1,11 @@
 import React from 'react';
 import {Row, Container, Nav} from 'react-bootstrap';
-import GalleryStyle from '../css/Gallery.css'
-import ImageCard from '../components/ImageCard'
+import GalleryStyle from '../../css/Gallery.css'
+import ImageCard from '../../components/ImageCard';
 import Axios from 'axios';
+import { useParams } from 'react-router';
 
-class Gallery extends React.Component{
+class GalleryPage extends React.Component{
 	constructor(props) {
 		super(props)
 		this.state = {photos: [], pages: []};
@@ -35,8 +36,8 @@ class Gallery extends React.Component{
   }
 
   	getLinks(){
+		console.log(this.props.match.params[0]);
 		const links = [];
-		console.log(this.props.page)
 		for (const page of this.state.pages) {
 			if (page.parentPage === this.props.page) {
 				links.push(page);
@@ -45,19 +46,31 @@ class Gallery extends React.Component{
 		return links;
 	}
 
+	getTitle(){
+		let title = this.props.match.params[0];
+		if (this.props.match.params[0] === '') {
+			title = this.props.page.toLowerCase();
+		} else {
+			title = this.props.match.params[0].split('/');
+			title = title[title.length - 1];
+		}
+		console.log(title);
+		return title
+	}
+
 	photosList() {
 		const photos = this.getLinks();
-		console.log(photos);
+		const title = this.getTitle();
 		if (photos.length !== 0) {
 			return photos.map((page) => {
-				let ref = '/gallery/' + page.title.toLowerCase();
-				return <ImageCard small={12} large={6} reference={ref} photo={page.fileName} text={page.fileName} folder="gallery" key={page._id}/>
+				let ref = `/${title}/${page.title.toLowerCase()}`; 
+				return <ImageCard small={12} large={6} reference={ref} photo={page.fileName} text={page.fileName} folder={title} key={page._id}/>
 			})
 		} else {
 			return this.state.photos.map(currentPhoto => {
-				if (currentPhoto.galleryTitle === "gallery") {
-					let ref = "/gallery/" + currentPhoto.reference
-					return <ImageCard small={12} large={6} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder="gallery" key={currentPhoto._id}/>
+				if (currentPhoto.galleryTitle === title) {
+					let ref = `/${title}/` + currentPhoto.reference
+					return <ImageCard small={12} large={6} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={title} key={currentPhoto._id}/>
 					
 				}
 			})
@@ -77,4 +90,4 @@ class Gallery extends React.Component{
 	}
 }
 
-export default Gallery;
+export default GalleryPage;

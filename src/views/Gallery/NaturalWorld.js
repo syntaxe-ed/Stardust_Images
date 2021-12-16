@@ -12,7 +12,6 @@ class NaturalWorld extends React.Component{
 	}
 
 	async componentDidMount() {
-		console.log(process.env.REACT_APP_IP_ADDRESS)
 		axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery`)
 			.then(response => {
 				this.setState ({

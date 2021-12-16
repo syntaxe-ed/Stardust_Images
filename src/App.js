@@ -19,6 +19,7 @@ import Comissions from './views/Gallery/Comissions'
 import Private_Events from './views/Gallery/Private_Events'
 import Natural_World from './views/Gallery/NaturalWorld'
 import axios from 'axios'
+import GalleryPage from './views/Gallery/galleryPage';
 
 class App extends Component {
   render(){
@@ -28,17 +29,18 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/gallery/events" component={Events} />
-                    <Route exact path="/gallery/landscapes" component={Landscapes} />
-                    <Route exact path="/gallery/events/dancing" component={Dancing} />
-                    <Route exact path="/gallery/events/weddings" component={Weddings} />
-                    <Route exact path="/gallery/events/trampolining" component={Trampolining} />
-                    <Route exact path="/gallery/events/exhibitions" component={Exhibitions} />
-                    <Route exact path="/gallery/events/comissions" component={Comissions} />
-                    <Route exact path="/gallery/events/private_events" component={Private_Events} />
-                    <Route exact path="/gallery/events/exhibitions/Natural_World" component={Natural_World} />
+                    <Route exact path="/gallery" render={(props) => <GalleryPage {...props} page='Gallery'/>}/>
+                    <Route exact path="/gallery/*" render={(props) => <GalleryPage {...props} page='Gallery'/>}/>
+                    <Route exact path="/gallery/events" render={(props) => <GalleryPage {...props} page='Events'/>} />
+                    <Route exact path="/gallery/landscapes" render={(props) => <GalleryPage {...props} page='Landscapes'/>} />
+                    <Route exact path="/gallery/events/dancing" render={(props) => <GalleryPage {...props} page='Dancing'/>} />
+                    <Route exact path="/gallery/events/weddings" render={(props) => <GalleryPage {...props} page='Weddings'/>} />
+                    <Route exact path="/gallery/events/trampolining" render={(props) => <GalleryPage {...props} page='Trampolining'/>} />
+                    <Route exact path="/gallery/events/exhibitions" render={(props) => <GalleryPage {...props} page='Exhibitions'/>} />
+                    <Route exact path="/gallery/events/comissions" render={(props) => <GalleryPage {...props} page='Comissions'/>} />
+                    <Route exact path="/gallery/events/private_events" render={(props) => <GalleryPage {...props} page='Private Events'/>} />
+                    <Route exact path="/gallery/events/exhibitions/Natural_World" render={(props) => <GalleryPage {...props} page='Natural World'/>} />
                     <Route path="/about" component={About} />
-                    <Route exct path="/gallery" component={Gallery} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/search/:id" children={<Search />} />
                     <Route component={NoMatch} />
