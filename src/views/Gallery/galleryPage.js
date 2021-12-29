@@ -90,7 +90,7 @@ class GalleryPage extends React.Component {
 					return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName} key={currentPhoto._id}/>
 				}
 				let ref = `${title}/` + currentPhoto.reference.toLowerCase()
-				return <ImageCard small={12} large={6} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName} key={currentPhoto._id} />
+				return <ImageCard small={12} large={photos.length > 2 ? 4 : 6} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName} key={currentPhoto._id} />
 			}
 		})).then((newPhotos) => {
 			this.setState({
