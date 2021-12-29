@@ -1,88 +1,117 @@
 import React from 'react';
-import {Row, Container, Nav} from 'react-bootstrap';
+import { Row, Container, Nav } from 'react-bootstrap';
 import GalleryStyle from '../../css/Gallery.css'
 import ImageCard from '../../components/ImageCard';
 import Axios from 'axios';
-import { useParams } from 'react-router';
+import GalleryCard from '../../components/GalleryCard';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
-class GalleryPage extends React.Component{
+class GalleryPage extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {photos: [], pages: []};
+		this.state = { photos: [], pages: [], displayPhotos: [], fileName: '', links: true};
 		this.photosList = this.photosList.bind(this)
 	}
 
 	async componentDidMount() {
 		await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery`)
-		.then(response => {
-			this.setState ({
-				photos: response.data
+			.then(response => {
+				this.setState({
+					photos: response.data
+				})
 			})
-		})
-		.catch((error) => {
-			console.log(error)
-		})
+			.catch((error) => {
+				console.log(error)
+			})
 
 		await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/pages`)
-		.then(response => {
-			this.setState ({
-				pages: response.data
+			.then(response => {
+				this.setState({
+					pages: response.data
+				})
 			})
-		})
-		.catch((error) => {
-			console.log(error)
-		})
+			.catch((error) => {
+				console.log(error)
+			})
 
-  }
+		await this.photosList();
+	}
 
-  	getLinks(){
-		console.log(this.props.match.params[0]);
+	async getLinks(title) {
 		const links = [];
 		for (const page of this.state.pages) {
-			if (page.parentPage === this.props.page) {
+			if (page.parentPage.toLowerCase() === title.toLowerCase()) {
 				links.push(page);
 			}
+		}
+		if (links.length === 0) {
+			this.setState({
+				links: false
+			})
 		}
 		return links;
 	}
 
-	getTitle(){
-		let title = this.props.match.params[0];
-		if (this.props.match.params[0] === '') {
-			title = this.props.page.toLowerCase();
+	getTitle() {
+		let title;
+		if (this.props.match.params.eventTitle) {
+			title = this.props.match.params.eventTitle;
+			this.setState({
+				fileName: `${this.props.match.params.galleryTitle}/${this.props.match.params.subGalleryTitle}/${this.props.match.params.eventTitle}`
+			});
+		} else if (this.props.match.params.subGalleryTitle) {
+			title = this.props.match.params.subGalleryTitle;
+			this.setState({
+				fileName: `${this.props.match.params.galleryTitle}/${this.props.match.params.subGalleryTitle}`
+			});
+		} else if (this.props.match.params.galleryTitle) {
+			title = this.props.match.params.galleryTitle;
+			this.setState({
+				fileName: `${this.props.match.params.galleryTitle}`
+			});
 		} else {
-			title = this.props.match.params[0].split('/');
-			title = title[title.length - 1];
+			title = 'gallery';
+			this.setState({
+				fileName: `gallery`
+			});
 		}
-		console.log(title);
 		return title
 	}
 
-	photosList() {
-		const photos = this.getLinks();
+	async photosList() {
 		const title = this.getTitle();
-		if (photos.length !== 0) {
-			return photos.map((page) => {
-				let ref = `/${title}/${page.title.toLowerCase()}`; 
-				return <ImageCard small={12} large={6} reference={ref} photo={page.fileName} text={page.fileName} folder={title} key={page._id}/>
-			})
-		} else {
-			return this.state.photos.map(currentPhoto => {
-				if (currentPhoto.galleryTitle === title) {
-					let ref = `/${title}/` + currentPhoto.reference
-					return <ImageCard small={12} large={6} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={title} key={currentPhoto._id}/>
-					
+		const photos = await this.getLinks(title);
+		console.log(photos);
+		let i = 0;
+		await Promise.all(this.state.photos.map(currentPhoto => {
+			if (currentPhoto.galleryTitle === title) {
+				i++;
+				if (photos.length === 0){
+					return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName} key={currentPhoto._id}/>
 				}
+				let ref = `${title}/` + currentPhoto.reference.toLowerCase()
+				return <ImageCard small={12} large={6} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName} key={currentPhoto._id} />
+			}
+		})).then((newPhotos) => {
+			this.setState({
+				displayPhotos: newPhotos
+			})
+		});
+
+		if (i === 0) {
+			this.setState({
+				displayPhotos: <Redirect to='/error' />
 			})
 		}
+
 	}
 
 	render() {
-		return(
-			<Container fluid className="galleryContainer" onContextMenu={(e)=> e.preventDefault()}>
-				<Row className="galleryRow">
+		return (
+			<Container fluid className={this.state.links ? "galleryContainer" : "exhibitionContainer"} onContextMenu={(e) => e.preventDefault()}>
+				<Row className={this.state.links ? "galleryRow": "exhibitionRow"}>
 					<Nav>
-						{this.photosList()}
+						{this.state.displayPhotos}
 					</Nav>
 				</Row>
 			</Container>
