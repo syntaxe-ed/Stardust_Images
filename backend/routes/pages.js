@@ -2,7 +2,7 @@ const router = require('express').Router();
 let galleryPages = require('../models/pages.model');
 
 router.route('/:id').get((req, res) => {
-	galleryPages.find({parentPage: req.params.id})
+	galleryPages.find({parentPage: req.params.id.toLowerCase()})
 		.then((galleryPages) => {
             console.log(galleryPages);
             res.json(galleryPages)

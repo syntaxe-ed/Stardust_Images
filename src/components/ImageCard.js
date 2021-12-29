@@ -3,7 +3,6 @@ import {Col, Nav} from 'react-bootstrap'
 
 function ImageCard(props) {
 		let image = require('../img/' + props.folder + "/" + props.photo + '.jpg')
-		console.log(props.reference)
 
 		return(
 			<Col sm={props.small} lg={props.large}>

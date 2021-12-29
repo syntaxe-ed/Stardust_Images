@@ -35,7 +35,7 @@ class GalleryPage extends React.Component {
 				console.log(error)
 			})
 
-		await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/pages`)
+		await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/pages/${id}`)
 			.then(response => {
 				this.setState({
 					pages: response.data
