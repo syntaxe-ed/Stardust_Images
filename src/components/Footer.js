@@ -13,7 +13,7 @@ function Footer() {
 						Website developed by <a href="http://edward35linton.github.io">Edward Linton</a>
 					</Col>
 					<Col className="Column" sm={12} lg={4}>
-						All Images Copyright ©Jennifer Linton 2020
+						All Images Copyright ©Jennifer Linton {new Date().getFullYear()}
 					</Col>
 					<Col className="Column" sm={12} lg={4}>
 						<a href="https://www.instagram.com/stardustimages_jen/" ><FontAwesomeIcon className="instagram" icon={faInstagram} size="lg"/></a>
