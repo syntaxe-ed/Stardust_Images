@@ -14,16 +14,7 @@ class GalleryPage extends React.Component {
 	}
 
 	async componentDidMount() {
-		let id = '';
-		if (this.props.match.params.eventTitle) {
-			id = this.props.match.params.eventTitle;
-		} else if (this.props.match.params.subGalleryTitle) {
-			id = this.props.match.params.subGalleryTitle;
-		} else if (this.props.match.params.galleryTitle) {
-			id = this.props.match.params.galleryTitle;
-		} else {
-			id = 'gallery'
-		}
+		const id = this.setId();
 
 		await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery/${id}`)
 			.then(response => {
@@ -89,10 +80,23 @@ class GalleryPage extends React.Component {
 		return title
 	}
 
+	setId() {
+		let id;
+		if (this.props.match.params.eventTitle) {
+			id = this.props.match.params.eventTitle;
+		} else if (this.props.match.params.subGalleryTitle) {
+			id = this.props.match.params.subGalleryTitle;
+		} else if (this.props.match.params.galleryTitle) {
+			id = this.props.match.params.galleryTitle;
+		} else {
+			id = 'gallery'
+		}
+		return id;
+	}
+
 	async photosList() {
 		const title = this.getTitle();
 		const photos = await this.getLinks(title);
-		console.log(photos);
 		let i = 0;
 		await Promise.all(this.state.photos.map(currentPhoto => {
 			if (currentPhoto.galleryTitle === title) {
