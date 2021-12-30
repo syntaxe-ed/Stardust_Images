@@ -35,14 +35,14 @@ function GalleryCard(props) {
 
 			        <Modal.Body>
 			        	<Row>
-				        	<Col sm={12} lg={8}>
+				        	<Col sm={12} lg={10}>
 				        		<img 
 						        	src={image}
-						        	style={vertical ? {width: '100%'} : {width: '44.5%'}}
+									className='modalImage'
 					        	/>
 				        	</Col>
 
-				        	<Col sm={12} lg={4} className="purchase">
+				        	<Col sm={12} lg={2} className="purchase">
 				        		<p>Style: 
 				        			<select name="style" id="style" className="selectBox">
 				        				<option value="canvas">Canvas</option>
