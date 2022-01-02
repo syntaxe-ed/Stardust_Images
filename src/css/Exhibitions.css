@@ -38,15 +38,13 @@
 }
 
 .selectBox {
-	width: 95%;
+	width: 100%;
 }
 
 .modal {
 	display: inline;
-	max-width: 70%;
-	transform: translateX(17.5%) translateY(0.75vh);
-	position: relative;
-	/* margin: auto; */
+	max-width: 69%;
+	transform: translateX(21.25%) translateY(0.25vh);
 }
 
 .buy-button {
