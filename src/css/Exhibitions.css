@@ -38,19 +38,26 @@
 }
 
 .selectBox {
-	margin-left: 2%;
+	width: 95%;
 }
 
 .modal {
 	display: inline;
-	max-width: 75%;
-	transform: translateX(15%) translateY(0.75vh);
-}
-
-.purchase {
+	max-width: 70%;
+	transform: translateX(17.5%) translateY(0.75vh);
+	position: relative;
+	/* margin: auto; */
 }
 
 .buy-button {
+	margin: auto;
 	height: 40px;
+	width: 95%;
+	bottom: 0;
+	left: 0;
 	position: absolute;
+}
+
+.selection {
+	text-align: center;
 }

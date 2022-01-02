@@ -43,14 +43,16 @@ function GalleryCard(props) {
 				        	</Col>
 
 				        	<Col sm={12} lg={2} className="purchase">
-				        		<p>Style: 
+				        		<p className="selection">Style: 
+									<br />
 				        			<select name="style" id="style" className="selectBox">
 				        				<option value="canvas">Canvas</option>
 				        				<option value="print">Print</option>
 				        			</select>
 				        		</p>
 
-				        		<p>Size: 
+				        		<p className="selection">Size: 
+									<br />
 				        			<select name="style" id="style" className="selectBox">
 				        				<option value="small">Small</option>
 				        				<option value="medium">Medium</option>
