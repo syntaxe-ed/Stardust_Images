@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Search from './components/Search'
 import axios from 'axios'
 import GalleryPage from './views/Gallery/galleryPage';
+import Upload from './views/Upload';
 
 class App extends Component {
   render(){
@@ -23,6 +24,7 @@ class App extends Component {
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
                     <Route path="/search/:id" children={<Search />} />
+                    <Route path="/login" component = {Upload} />
                     <Route component={NoMatch} />
                 </Switch>
             </Router>
