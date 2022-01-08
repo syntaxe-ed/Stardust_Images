@@ -17,4 +17,15 @@ router.route('/').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err))
 });
 
+router.route('/').post((req, res) => {
+	const page = new galleryPages({title: req.body.title, parentPage: req.body.parentPage, fileName: req.body.fileName})
+	page.save((err) => {
+		if (err) {
+			res.json(`Page ${page.title} could not be created, ${err}`)
+		} else {
+			res.json('Page created')
+		}
+	})
+})
+
 module.exports = router;

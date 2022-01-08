@@ -8,7 +8,7 @@ const photosSchema = new Schema ({
 		unique: true,
 		trim: false
 	},
-	keyWords: {
+	keywords: {
 		type: String
 	},
 	galleryTitle: {
