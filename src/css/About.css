@@ -1,7 +1,6 @@
 .aboutContainer {
 	min-height: calc(100vh - 110px);
 	display: flex;
-	background-image: url('E:\\Programming\\Stardust_Images\\website\\src\\img\\image1.jpeg');
 	object-fit: cover;
 }
 
