@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 function Upload() {
 
 	return (
-		!localStorage.getItem('accessToken') ? <Redirect to = {{pathname: 'login'}} /> :
+		!localStorage.getItem('accessToken') ? <Redirect to={{pathname: 'login'}} /> :
 		<div>
 
 		</div>

@@ -30,8 +30,7 @@ class LoginForm extends React.Component {
     }
 
     redirect() {
-        window.location.replace = `${process.env('APP_IP_ADDRESS')}/upload`;
-        window.location.reload(false);
+        window.location = (`/upload`);
     }
 
     async checkUser() {
