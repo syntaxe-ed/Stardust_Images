@@ -26,13 +26,16 @@ async function getUsers() {
   }
 
 router.route('/login').post(async (req, res) => {
+  try {
     if (await myAuth(req.body.username, req.body.password)) {
-        const token = `Basic ${Buffer.from(req.body.username + ':' + req.body.password).toString('base64')}`;
-        res.json({token});
+      const token = `${Buffer.from(req.body.username + ':' + req.body.password).toString('base64')}`;
+      res.json({token});
     } else {
-        res.sendStatus(401).json('Incorrect Username or Password')
+      res.sendStatus(401);
     }
-    
+  } catch {
+    res.sendStatus(401);
+  } 
 })
 
 module.exports = router;

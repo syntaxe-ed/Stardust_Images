@@ -1,10 +1,12 @@
 import React from 'react';
-import Login from '../components/Login'
+import { Redirect } from 'react-router-dom';
 
 function Upload() {
+
 	return (
+		!localStorage.getItem('accessToken') ? <Redirect to = {{pathname: 'login'}} /> :
 		<div>
-			<Login />
+
 		</div>
 	);
 }

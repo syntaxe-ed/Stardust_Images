@@ -11,6 +11,7 @@ import Search from './components/Search'
 import axios from 'axios'
 import GalleryPage from './views/Gallery/galleryPage';
 import Upload from './views/Upload';
+import Login from './views/Login';
 
 class App extends Component {
   render(){
@@ -23,8 +24,9 @@ class App extends Component {
                     <Route exact path="/gallery/:galleryTitle?/:subGalleryTitle?/:eventTitle?" render={(props) => <GalleryPage {...props} page='Gallery'/>}/>
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
-                    <Route path="/search/:id" children={<Search />} />
-                    <Route path="/login" component = {Upload} />
+                    <Route path="/search/:id" children={Search} />
+                    <Route path="/upload" component={Upload} />
+                    <Route path="/login" component={Login} /> 
                     <Route component={NoMatch} />
                 </Switch>
             </Router>
