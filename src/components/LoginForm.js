@@ -1,6 +1,8 @@
 import React from "react";
 import Axios from "axios";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import {Row, Col} from "react-bootstrap"
+import LoginStyle from "../css/Login.css"
 
 class LoginForm extends React.Component {
     constructor() {
@@ -48,14 +50,21 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" onChange={this.setUsername}></input>
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" onChange={this.setPassword}></input>
-
-                <button onClick={this.checkUser}>Login</button>
-            </div>
+            <form class="form-horizontal formContainer">
+                <div class="container form-group">
+                        <Row className="row justify-content-center my-auto">
+                            <label htmlFor="username" className="control-label col-3 my-auto">Username:</label>
+                            <input type="text" className="form-control col-5 rounded-pill" id="username" name="username" onChange={this.setUsername}></input>
+                        </Row>
+                        <Row className="row justify-content-center my-auto">
+                            <label htmlFor="password" className="control-label col-3 my-auto">Password:</label>
+                            <input type="password" className="form-control col-5 rounded-pill" id="password" name="password" onChange={this.setPassword}></input>
+                        </Row>
+                        <Row className="row justify-content-center my-auto">
+                            <button type="submit" onClick={this.checkUser} class="btn btn-primary rounded-pill">Login</button>
+                        </Row>
+                </div>
+            </form>
         )   
     }
 }
