@@ -13,6 +13,7 @@
     display: flex;
 }
 
+
 .btn-primary {
     background-color: grey;
     border-color: grey;
@@ -26,9 +27,16 @@
     opacity: 0.5;
 }
 
-.form-control {
+.username {
     margin-left: 20px;
     width: 50%;
+    border-color: grey;
+}
+
+.password {
+    margin-left: 20px;
+    width: 50%;
+    border-color: grey;
 }
 
 .control-label:active {
