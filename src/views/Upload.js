@@ -42,7 +42,7 @@ function Upload() {
 
 				<Row className="rowContainer">
 					<Col className="title" sm={12} lg={12}>
-						{actionValue === "default" ? <h1 className="title">Choose an action</h1> : ( categoryValue === "default" ? <h1 className="title">Choose a Category</h1> : <UploadContainer />)}
+						{actionValue === "default" ? <h1 className="title">Choose an action</h1> : ( categoryValue === "default" ? <h1 className="title">Choose a Category</h1> : <UploadContainer action={actionValue} category={categoryValue} />)}
 					</Col>
 				</Row>
 			</Container>
