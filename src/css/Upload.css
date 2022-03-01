@@ -12,7 +12,6 @@
 
 .fluidContainer {
     text-align: center;
-    margin-top: 1%;
     max-height: calc(100vh - 110px);
 }
 
@@ -21,11 +20,12 @@
 }
 
 .rowContainer {
-    height: 95%;
+    height: 94%;
     padding-bottom: 0;
     display: flex;
 }
 
 .taskbar {
     height: 5%;
+    margin-top: 1%;
 }

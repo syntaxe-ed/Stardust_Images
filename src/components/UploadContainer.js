@@ -1,4 +1,5 @@
 import React from "react";
+import DataTable from "./DataTable";
 
 function UploadContainer(props) {
     let value = null;
@@ -19,20 +20,7 @@ function UploadContainer(props) {
             }
             break;
         case("edit"):
-            switch(props.category){
-                case("products"):
-                    value = <h1>Test 4</h1>
-                    break;
-                case("pages"):
-                    value = <h1>Test 5</h1>
-                    break;
-                case("images"):
-                    value = <h1>Test 6</h1>
-                    break;
-                default:
-                    break;
-            }
-            break;
+            value = <DataTable category={props.category} />;
         default:
             break;
     }
