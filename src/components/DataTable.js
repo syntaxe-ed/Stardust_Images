@@ -2,6 +2,7 @@ import Axios from "axios";
 import { Component } from "react";
 import React from "react";
 import { Table } from "react-bootstrap";
+import UploadStyle from "../css/Upload.css"
 
 class DataTable extends React.Component {
     constructor(props) {
@@ -34,10 +35,10 @@ class DataTable extends React.Component {
         for (const row of this.state.value) {
             rowsToPush.push(
             <tr key={row._id}>
-                <td>Image</td>
-                <td>{row.galleryTitle}</td>
-                <td>{row.fileName}</td>
-                <td>{row.keywords}</td>
+                <td><input className="tableInput" defaultValue="Image"></input></td>
+                <td><input className="tableInput" defaultValue={row.galleryTitle}></input></td>
+                <td><input className="tableInput" defaultValue={row.fileName}></input></td>
+                <td><input className="tableInput" defaultValue={row.keywords}></input></td>
             </tr>
             )
         }

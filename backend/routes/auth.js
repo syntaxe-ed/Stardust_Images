@@ -29,6 +29,7 @@ router.route('/login').post(async (req, res) => {
   try {
     if (await myAuth(req.body.username, req.body.password)) {
       const token = `${Buffer.from(req.body.username + ':' + req.body.password).toString('base64')}`;
+      console.log(token);
       res.json({token});
     } else {
       res.sendStatus(401);
