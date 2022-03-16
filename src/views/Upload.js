@@ -7,6 +7,7 @@ import {UploadStyle} from "../css/Upload.css"
 function Upload() {
 	const [actionValue, setActionValue] = useState("default");
 	const [categoryValue, setCategoryValue] = useState("default");
+	const button = null;
 
 	const handleActionChange = (e) => {
 		setActionValue(e.target.value);
@@ -15,6 +16,11 @@ function Upload() {
 
 	const handleCategoryChange = (e) => {
 		setCategoryValue(e.target.value);
+		if (actionValue === 'add' && categoryValue !== 'default') {
+			button = <button>Add</button>
+		} else if (actionValue === 'edit' && categoryValue !== 'default') {
+			button = <button>Save</button>
+		} 
 	}
 
 
@@ -45,6 +51,7 @@ function Upload() {
 						{actionValue === "default" ? <h1 className="title">Choose an action</h1> : ( categoryValue === "default" ? <h1 className="title">Choose a Category</h1> : <UploadContainer action={actionValue} category={categoryValue} />)}
 					</Col>
 				</Row>
+				{actionValue === 'add' && categoryValue !== 'default' ? <button className="saveButton button rounded-pill">Add</button> : (actionValue === 'edit' && categoryValue !== 'default' ? <button className="saveButton button rounded-pill">Save</button> : '')}
 			</Container>
 		</div>
 	);

@@ -1,13 +1,19 @@
 import Axios from "axios";
 import { Component } from "react";
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Pagination, Table } from "react-bootstrap";
 import UploadStyle from "../css/Upload.css"
 
 class DataTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: [], category: props.category, rows: [], headers: []}
+        this.state = {value: [], category: props.category, rows: [], headers: [], pages: [], currentPage: 1}
+    }
+
+    setCurrentPage(i) {
+        this.setState({
+            currentPage: i
+        })
     }
 
     async getImages() {
@@ -32,19 +38,34 @@ class DataTable extends React.Component {
         })
 
         let rowsToPush = [];
-        for (const row of this.state.value) {
-            rowsToPush.push(
-            <tr key={row._id}>
-                <td><input className="tableInput" defaultValue="Image"></input></td>
-                <td><input className="tableInput" defaultValue={row.galleryTitle}></input></td>
-                <td><input className="tableInput" defaultValue={row.fileName}></input></td>
-                <td><input className="tableInput" defaultValue={row.keywords}></input></td>
+
+        for (let i = 0; i < (this.state.value.length / 10); i++){
+            rowsToPush.push([])
+        }
+
+        for (let j = 0; j < this.state.value.length; j++){
+            const row = this.state.value[j];
+            rowsToPush[~~(j / 10)].push(
+                <tr key={row._id}>
+                <td><input id={`${row._id}_image`} className="tableInput" defaultValue="Image"></input></td>
+                <td><input id={`${row._id}_galleryTitle`} className="tableInput" defaultValue={row.galleryTitle}></input></td>
+                <td><input id={`${row._id}_fileName`} className="tableInput" defaultValue={row.fileName}></input></td>
+                <td><input id={`${row._id}_keywords`} className="tableInput" defaultValue={row.keywords}></input></td>
             </tr>
             )
         }
 
+        let pagesToDisplay = [];
+        for (let i = 1; i < (this.state.value.length / 10) + 1; i++){
+            pagesToDisplay.push(<Pagination.Item onClick={(event) => this.setCurrentPage(i)} key={i}>{i}</Pagination.Item>)
+        }
+
         this.setState({
             rows: rowsToPush
+        })
+
+        this.setState({
+            pages: pagesToDisplay
         })
     }
 
@@ -59,14 +80,25 @@ class DataTable extends React.Component {
                     console.log(error)
             })
 
-        let rowsToPush = [];
-        for (const row of this.state.value) {
-            rowsToPush.push(
-            <tr key={row._id}>
+        let rowsToPush = []
+
+        for (let i = 0; i < (this.state.value.length / 10); i++){
+            rowsToPush.push([])
+        }
+
+        for (let j = 0; j < this.state.value.length; j++){
+            const row = this.state.value[j];
+            rowsToPush[~~(j / 10)].push(
+                <tr key={row._id}>
                 <td>{row.title}</td>
                 <td>{row.parentPage}</td>
             </tr>
             )
+        }
+
+        let pagesToDisplay = [];
+        for (let i = 1; i < this.state.value.length / 10 +1; i++){
+            pagesToDisplay.push(<Pagination.Item onClick={this.setCurrentPage(i)} key={i}>{i}</Pagination.Item>)
         }
 
         this.setState({
@@ -79,6 +111,10 @@ class DataTable extends React.Component {
 
         this.setState({
             rows: rowsToPush
+        })
+
+        this.setState({
+            pages: pagesToDisplay
         })
     }
 
@@ -100,9 +136,10 @@ class DataTable extends React.Component {
                         {this.state.headers}
                     </thead>
                     <tbody>
-                        {this.state.rows}
+                        {this.state.rows[this.state.currentPage - 1]}
                     </tbody>
                 </Table>
+                <Pagination>{this.state.pages}</Pagination>
             </div>
         );
     };
