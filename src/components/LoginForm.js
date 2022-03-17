@@ -52,15 +52,15 @@ class LoginForm extends React.Component {
         return (
             <form className="form-horizontal formContainer" onSubmit={this.checkUser}>
                 <div className="container form-group">
-                        <Row className="row justify-content-center my-auto">
+                        <Row className="row justify-content-center my-auto login-row">
                             <label htmlFor="username" className="control-label col-3 my-auto">Username:</label>
                             <input type="text" className="username col-5 rounded-pill" id="username" name="username" onChange={this.setUsername}></input>
                         </Row>
-                        <Row className="row justify-content-center my-auto">
+                        <Row className="row justify-content-center my-auto login-row">
                             <label htmlFor="password" className="control-label col-3 my-auto">Password:</label>
                             <input type="password" className="password col-5 rounded-pill" id="password" name="password" onChange={this.setPassword}></input>
                         </Row>
-                        <Row className="row justify-content-center my-auto">
+                        <Row className="row justify-content-center my-auto login-row">
                             <button type="Submit" onSubmit={this.checkUser} className="btn btn-primary rounded-pill">Login</button>
                         </Row>
                 </div>
