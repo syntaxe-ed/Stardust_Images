@@ -53,6 +53,7 @@ class DataTable extends React.Component {
             value: items
         })
         this.getRows()
+        this.props.updatedValues(this.state.value)
     }
 
     async getImages() {
