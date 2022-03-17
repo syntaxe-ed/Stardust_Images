@@ -24,4 +24,16 @@ router.route('/').post((req, res) => {
 	})
 })
 
+router.route('/:id/update').post((req, res) => {
+	const query = {'_id': req.params.id}
+	const newEntity = {'_id': req.params.id, keywords: req.body.keywords, galleryTitle: req.body.galleryTitle, reference: req.body.reference, fileName: req.body.fileName}
+	galleryPages.findOneAndUpdate(query, newEntity, {upsert: true}, (err, dock) => {
+		if (err) {
+			console.log(err);
+			return res.send(500, {error: err});
+		}
+		return res.send('Successfully saved.')
+	})
+})
+
 module.exports = router;
