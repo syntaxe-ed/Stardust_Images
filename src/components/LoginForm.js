@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
                             <input type="password" className="password col-5 rounded-pill" id="password" name="password" onChange={this.setPassword}></input>
                         </Row>
                         <Row className="row justify-content-center my-auto login-row">
-                            <button type="Submit" onSubmit={this.checkUser} className="btn btn-primary rounded-pill">Login</button>
+                            <button type="submit" onClick={this.checkUser} className="btn btn-primary rounded-pill">Login</button>
                         </Row>
                 </div>
             </form>

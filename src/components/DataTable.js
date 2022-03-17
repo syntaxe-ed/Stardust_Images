@@ -7,13 +7,52 @@ import UploadStyle from "../css/Upload.css"
 class DataTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: [], category: props.category, rows: [], headers: [], pages: [], currentPage: 1}
+        this.state = {value: [], category: props.category, rows: [], headers: [], pages: [], currentPage: 1, initialValue: []}
+        this.handleChange = this.handleChange.bind(this);
+        this.getImages = this.getImages.bind(this);
+    }
+
+    async getRows() {
+        let rowsToPush = [];
+
+        for (let i = 0; i < (this.state.value.length / 10); i++){
+            rowsToPush.push([])
+        }
+
+        for (let j = 0; j < this.state.value.length; j++){
+            const row = this.state.value[j];
+            rowsToPush[~~(j / 10)].push(
+                <tr key={row._id}>
+                <td><input id={`${row._id}_image`} className="tableInput" defaultValue="Image"></input></td>
+                <td><input onChange={(e) => {this.handleChange(e, j, 'galleryTitle')}} id={`${row._id}_galleryTitle`} className="tableInput" value={this.state.value[j].galleryTitle}></input></td>
+                <td><input onChange={(e) => {this.handleChange(e, j, 'fileName')}} id={`${row._id}_fileName`} className="tableInput" value={this.state.value[j].fileName}></input></td>
+                <td><input onChange={(e) => {this.handleChange(e, j, 'keywords')}} id={`${row._id}_keywords`} className="tableInput" value={this.state.value[j].keywords}></input></td>
+            </tr>
+            )
+        }
+
+        this.setState({
+            rows: rowsToPush
+        })
+
+        return rowsToPush
     }
 
     setCurrentPage(i) {
         this.setState({
             currentPage: i
         })
+    }
+
+    async handleChange(e, j, text) {
+        let items = [...this.state.value];
+        let item = {...items[j]};
+        item[`${text}`] = e.target.value;
+        items[j] = item;
+        await this.setState({
+            value: items
+        })
+        this.getRows()
     }
 
     async getImages() {
@@ -37,23 +76,7 @@ class DataTable extends React.Component {
             </tr>
         })
 
-        let rowsToPush = [];
-
-        for (let i = 0; i < (this.state.value.length / 10); i++){
-            rowsToPush.push([])
-        }
-
-        for (let j = 0; j < this.state.value.length; j++){
-            const row = this.state.value[j];
-            rowsToPush[~~(j / 10)].push(
-                <tr key={row._id}>
-                <td><input id={`${row._id}_image`} className="tableInput" defaultValue="Image"></input></td>
-                <td><input id={`${row._id}_galleryTitle`} className="tableInput" defaultValue={row.galleryTitle}></input></td>
-                <td><input id={`${row._id}_fileName`} className="tableInput" defaultValue={row.fileName}></input></td>
-                <td><input id={`${row._id}_keywords`} className="tableInput" defaultValue={row.keywords}></input></td>
-            </tr>
-            )
-        }
+        const rowsToPush = this.getRows()
 
         let pagesToDisplay = [];
         for (let i = 1; i < (this.state.value.length / 10) + 1; i++){
@@ -61,11 +84,11 @@ class DataTable extends React.Component {
         }
 
         this.setState({
-            rows: rowsToPush
+            pages: pagesToDisplay
         })
 
         this.setState({
-            pages: pagesToDisplay
+            initialValues: this.state.value
         })
     }
 
