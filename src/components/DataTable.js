@@ -10,6 +10,7 @@ class DataTable extends React.Component {
         this.state = {value: [], category: props.category, rows: [], headers: [], pages: [], currentPage: 1, initialValue: []}
         this.handleChange = this.handleChange.bind(this);
         this.getImages = this.getImages.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     async getRows() {
@@ -53,7 +54,7 @@ class DataTable extends React.Component {
             value: items
         })
         this.getRows()
-        this.props.updatedValues(this.state.value)
+        // this.props.updatedValues(this.state.value)
     }
 
     async getImages() {
@@ -61,6 +62,10 @@ class DataTable extends React.Component {
             .then(response => {
                 this.setState({
                     value: response.data
+                })
+
+                this.setState({
+                    initialValue: response.data
                 })
             })
             .catch((error) => {
@@ -152,6 +157,24 @@ class DataTable extends React.Component {
         }
     }    
 
+    async handleSave(){
+        let countChanges = [];
+        for (let i = 0; i < this.state.value.length; i++) {
+            if (this.state.value[i] !== this.state.initialValue[i]) {
+                console.log(this.state.value[i])
+                countChanges.push(this.state.value[i]);
+            }
+        }
+        
+        if (countChanges.length > 0){
+            if (window.confirm(`Save changes? You have changed ${countChanges.length} items`)){
+                for (const changedValue of countChanges){
+                    await Axios.post(`${process.env.REACT_APP_IP_ADDRESS}/pages/${changedValue._id}/update`, changedValue);
+                }
+            }
+        }
+    }
+
     render() {
         return (
             <div>
@@ -164,6 +187,7 @@ class DataTable extends React.Component {
                     </tbody>
                 </Table>
                 <Pagination>{this.state.pages}</Pagination>
+				<button onClick={this.handleSave} className="rounded-pill saveButton">Save</button>
             </div>
         );
     };

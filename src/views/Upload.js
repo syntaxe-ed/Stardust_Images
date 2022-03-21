@@ -61,7 +61,6 @@ function Upload() {
 						{actionValue === "default" ? <h1 className="title">Choose an action</h1> : ( categoryValue === "default" ? <h1 className="title">Choose a Category</h1> : <UploadContainer action={actionValue} category={categoryValue} />)}
 					</Col>
 				</Row>
-				{actionValue === 'add' && categoryValue !== 'default' ? <button onClick={handleAdd()} className="saveButton button rounded-pill">Add</button> : (actionValue === 'edit' && categoryValue !== 'default' ? <button onClick={handleSave()} className="saveButton button rounded-pill">Save</button> : '')}
 			</Container>
 		</div>
 	);

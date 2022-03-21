@@ -14,6 +14,7 @@ async function getUsers() {
   }
   
   async function myAuth(username, password) {
+    console.log('test')
     let match = false;
     const users = await getUsers();
     for (const user of users) {

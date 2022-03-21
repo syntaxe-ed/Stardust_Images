@@ -3,7 +3,6 @@ import DataTable from "./DataTable";
 
 function UploadContainer(props) {
     let value = null;
-    let button = null;
     switch(props.action) {
         case("add"):
             switch(props.category){

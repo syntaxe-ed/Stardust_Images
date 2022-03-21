@@ -39,7 +39,6 @@ async function getUsers() {
 }
 
 async function myAuth(username, password, cb) {
-  let match = false;
   const users = await getUsers();
   for (const user of users) {
     const salt = await (user.password.substring(0, process.env.HASH_LENGTH));
