@@ -16,6 +16,8 @@ function GalleryCard(props) {
   		const handleShow = () => setShow(true);
 		const [material, setMaterial] = React.useState('Canvas');
 		const [size, setSize] = React.useState('Small');
+		const name = image.split('/')[3].split('.')[0]
+		console.log(name);
 		return(
 			<>
 				<Col sm={props.small} lg={vertical ? 2 : 1} className="galleryCard">
@@ -39,7 +41,7 @@ function GalleryCard(props) {
 				        	<Col sm={12} lg={8}>
 				        		<img className='display-image'
 						        	src={image}
-						        	style={vertical ? {'max-width': '100%'} : {'max-width': '44.5%'}}
+						        	style={vertical ? {'maxWidth': '100%'} : {'maxWidth': '44.5%'}}
 					        	/>
 				        	</Col>
 
@@ -67,7 +69,7 @@ function GalleryCard(props) {
 										</select>
 									</Col>
 								</Row>
-				        		<Button onClick={handleClose} className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="50.00" data-item-url="/" data-item-name="Bluetit"
+				        		<Button onClick={handleClose} className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="50.00" data-item-url="/" data-item-name={name}
 								 data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print[-5.00]" data-item-custom1-value={material}
 								 data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+10.00]|Large[+20.00]" data-item-custom2-value={size}>
 				        			Add to Basket
