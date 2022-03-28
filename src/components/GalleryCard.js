@@ -33,32 +33,40 @@ function GalleryCard(props) {
 			        	</Modal.Title>
 			        </Modal.Header>
 
-			        <Modal.Body>
+			        <Modal.Body className='display-container'>
 			        	<Row>
 				        	<Col sm={12} lg={8}>
-				        		<img 
+				        		<img className='display-image'
 						        	src={image}
-						        	style={vertical ? {width: '100%'} : {width: '44.5%'}}
+						        	style={vertical ? {'max-width': '100%'} : {'max-width': '44.5%'}}
 					        	/>
 				        	</Col>
 
 				        	<Col sm={12} lg={4} className="purchase">
-				        		<p>Style: 
-				        			<select name="style" id="style" className="selectBox">
-				        				<option value="canvas">Canvas</option>
-				        				<option value="print">Print</option>
-				        			</select>
-				        		</p>
-
-				        		<p>Size: 
-				        			<select name="style" id="style" className="selectBox">
-				        				<option value="small">Small</option>
-				        				<option value="medium">Medium</option>
-				        				<option value="large">Large</option>
-				        			</select>
-				        		</p>
-
-				        		<Button className="buy-button snipcart-add-item" data-item-id="1" data-item-price="200.00" data-item-url="/" data-item-name="Bluetit"
+								<Row className="purchase-row">
+									<Col sm={6} lg={4}>
+										<p>Style: </p>
+									</Col>
+									<Col sm={6} lg={8}>
+										<select name="style" id="style" className="selectBox rounded-pill">
+											<option value="canvas">Canvas</option>
+											<option value="print">Print</option>
+										</select>
+									</Col>
+								</Row>
+								<Row className="purchase-row">
+									<Col sm={6} lg={4}>
+										<p>Size: </p>
+									</Col>
+									<Col sm={6} lg={8}>
+										<select name="style" id="style" className="selectBox rounded-pill">
+											<option value="small">Small</option>
+											<option value="medium">Medium</option>
+											<option value="large">Large</option>
+										</select>
+									</Col>
+								</Row>
+				        		<Button className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="200.00" data-item-url="/" data-item-name="Bluetit"
 								 data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print"
 								 data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+50.00]|Large">
 				        			Add to Basket

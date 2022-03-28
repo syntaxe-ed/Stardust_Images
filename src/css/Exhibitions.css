@@ -44,5 +44,18 @@
 }
 
 .selectBox {
-	margin-left: 2%;
+	width: 75%;
+}
+
+.purchase-row {
+	text-align: center;
+	margin-bottom: 5%;
+}
+
+.display-container {
+	max-height: 90vh;
+}
+
+.display-image {
+	max-height: 85vh;
 }
