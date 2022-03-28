@@ -14,7 +14,8 @@ function GalleryCard(props) {
 		const [show, setShow] = React.useState(false);
   		const handleClose = () => setShow(false);
   		const handleShow = () => setShow(true);
-
+		const [material, setMaterial] = React.useState('Canvas');
+		const [size, setSize] = React.useState('Small');
 		return(
 			<>
 				<Col sm={props.small} lg={vertical ? 2 : 1} className="galleryCard">
@@ -48,9 +49,9 @@ function GalleryCard(props) {
 										<p>Style: </p>
 									</Col>
 									<Col sm={6} lg={8}>
-										<select name="style" id="style" className="selectBox rounded-pill">
-											<option value="canvas">Canvas</option>
-											<option value="print">Print</option>
+										<select name="material" id="material" className="selectBox rounded-pill" value={material} onChange={(d) => {setMaterial(d.target.value)}}>
+											<option value="Canvas">Canvas</option>
+											<option value="Print">Print</option>
 										</select>
 									</Col>
 								</Row>
@@ -59,16 +60,16 @@ function GalleryCard(props) {
 										<p>Size: </p>
 									</Col>
 									<Col sm={6} lg={8}>
-										<select name="style" id="style" className="selectBox rounded-pill">
-											<option value="small">Small</option>
-											<option value="medium">Medium</option>
-											<option value="large">Large</option>
+										<select name="style" id="style" className="selectBox rounded-pill" value={size} onChange={(d) => {setSize(d.target.value)}}>
+											<option value="Small">Small</option>
+											<option value="Medium">Medium</option>
+											<option value="Large">Large</option>
 										</select>
 									</Col>
 								</Row>
-				        		<Button className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="200.00" data-item-url="/" data-item-name="Bluetit"
-								 data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print"
-								 data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+50.00]|Large">
+				        		<Button onClick={handleClose} className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="50.00" data-item-url="/" data-item-name="Bluetit"
+								 data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print[-5.00]" data-item-custom1-value={material}
+								 data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+10.00]|Large[+20.00]" data-item-custom2-value={size}>
 				        			Add to Basket
 				        		</Button>
 				        	</Col>
