@@ -17,7 +17,6 @@ function GalleryCard(props) {
 		const [material, setMaterial] = React.useState('Canvas');
 		const [size, setSize] = React.useState('Small');
 		const name = image.split('/')[3].split('.')[0]
-		console.log(name);
 		return(
 			<>
 				<Col sm={props.small} lg={vertical ? 2 : 1} className="galleryCard">
