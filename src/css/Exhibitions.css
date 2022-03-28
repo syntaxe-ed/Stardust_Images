@@ -19,7 +19,8 @@
 }
 
 .exhibitionContainer {
-	min-height: calc(100vh - 110px);
+	margin-top: 10px;
+	min-height: calc(100vh - 120px);
 	display: flex;
 }
 

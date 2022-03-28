@@ -1,8 +1,5 @@
 .bag-container {
     color: grey;
-    justify-content: center;
-    text-align: center;
-    margin: auto;
-    text-align: center;
-    display: inline-flex;
+    margin-right: 10px;
+    display: flex;
 }
