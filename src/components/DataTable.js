@@ -161,7 +161,6 @@ class DataTable extends React.Component {
         let countChanges = [];
         for (let i = 0; i < this.state.value.length; i++) {
             if (this.state.value[i] !== this.state.initialValue[i]) {
-                console.log(this.state.value[i])
                 countChanges.push(this.state.value[i]);
             }
         }
@@ -169,7 +168,7 @@ class DataTable extends React.Component {
         if (countChanges.length > 0){
             if (window.confirm(`Save changes? You have changed ${countChanges.length} items`)){
                 for (const changedValue of countChanges){
-                    await Axios.post(`${process.env.REACT_APP_IP_ADDRESS}/pages/${changedValue._id}/update`, changedValue);
+                    await Axios.post(`${process.env.REACT_APP_IP_ADDRESS}/${this.state.category === "images" ? "gallery" : this.state.category}/${changedValue._id}/update`, changedValue);
                 }
             }
         }

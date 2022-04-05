@@ -39,6 +39,7 @@ async function getUsers() {
 }
 
 async function myAuth(username, password, cb) {
+  console.log('test', username, password, cb);
   const users = await getUsers();
   for (const user of users) {
     const salt = await (user.password.substring(0, process.env.HASH_LENGTH));
@@ -48,10 +49,15 @@ async function myAuth(username, password, cb) {
   return cb(null, match);
 }
 
+function getUnautherizesResponse(req, res, next) {
+  console.log(req.auth ? ('Credentioals', req.auth.user + ':' + req.auth.password + ' rejected') : 'No credentials provided');
+  return req.auth ? ('Credentioals', req.auth.user + ':' + req.auth.password + ' rejected') : 'No credentials provided'
+}
+
 app.use(cors());
 app.use(express.json());
 
-const basicAuthMiddleware = basicAuth({authorizer: myAuth, authorizeAsync: true});
+const basicAuthMiddleware = basicAuth({authorizer: myAuth, authorizeAsync: true, unauthorizedResponse: getUnautherizesResponse});
 app.use((req, res, next) => shouldAuthenticate(req) ? basicAuthMiddleware(req, res, next) : next());
 
 const photosRouter = require('./routes/photos');

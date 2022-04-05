@@ -5,7 +5,7 @@ import App from './App';
 
 Axios.interceptors.request.use(
   request => {
-    request.headers['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
+    request.headers['Authorization'] = `Basic ${(localStorage.getItem('accessToken'))}`;
     return request;
   }, error => {
     return Promise.reject(error);

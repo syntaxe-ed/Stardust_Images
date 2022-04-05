@@ -31,7 +31,7 @@ router.route('/').post((req, res) => {
 router.route('/:id/update').post((req, res) => {
 	const query = {'_id': req.params.id}
 	const newEntity = {'_id': req.params.id, title: req.body.title, parentPage: req.body.parentPage, fileName: req.body.fileName}
-	galleryPages.findOneAndUpdate(query, newEntity, {upsert: true}, (err, dock) => {
+	galleryPages.findOneAndUpdate(query, newEntity, {upsert: true, async: true}, (err, dock) => {
 		if (err) {
 			console.log(err);
 			return res.send(500, {error: err});
