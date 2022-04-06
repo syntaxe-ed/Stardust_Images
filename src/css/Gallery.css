@@ -1,5 +1,10 @@
 @import url(//fonts.googleapis.com/css?family=Pacifico);
 
+@font-face {
+	font-family: 'Bradley Hand ITC';
+	src: local('BRADHITC'), url(../fonts/BRADHITC.TTF) format('truetype');
+}
+
 .imageCard {
 	padding-top: 2%;
 	padding-bottom: 2%;
@@ -14,7 +19,8 @@
 }
 
 .imageCardText {
-	font-family: 'Pacifico';
+	font-family: 'Bradley Hand ITC';
+	font-weight: bold;
 	padding: 10px;
 	outline: none;
 }

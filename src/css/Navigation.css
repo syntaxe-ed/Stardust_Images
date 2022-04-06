@@ -3,3 +3,13 @@
     margin-right: 10px;
     display: flex;
 }
+
+@font-face {
+	font-family: 'Bradley Hand ITC';
+	src: local('BRADHITC'), url(../fonts/BRADHITC.TTF) format('truetype');
+}
+
+Nav {
+    font-family: 'Bradley Hand ITC';
+    font-weight: bold;
+}

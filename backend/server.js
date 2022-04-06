@@ -64,10 +64,12 @@ const photosRouter = require('./routes/photos');
 //const emailRouter = require('./routes/email');
 const pagesRouter = require('./routes/pages');
 const authRouter = require('./routes/auth');
+const productsRouter = require('./routes/products');
 
 app.use('/gallery', photosRouter);
 app.use('/pages', pagesRouter);
 app.use('/auth', authRouter);
+app.use('/products', productsRouter);
 // app.use('/send', emailRouter);
 // app.use(session({
 //   secret: '2C44-4D44-WppQ38S',
