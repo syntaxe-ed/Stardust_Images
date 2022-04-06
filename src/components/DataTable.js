@@ -258,7 +258,7 @@ class DataTable extends React.Component {
             await this.getProducts();
         }
     }
-
+    
     async handleSave() {
         let countChanges = [];
         for (let i = 0; i < this.state.value.length; i++) {
