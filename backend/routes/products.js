@@ -18,7 +18,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/').post((req, res) => {
-	const product = new products({fileName: req.body.fileName, productName: req.body.productName, price: req.body.price})
+	const product = new products({fileName: req.body.fileName, productName: req.body.productName, price: req.body.price, category: req.body.category})
 	product.save((err) => {
 		if (err) {
 			res.json(`Page ${product.productName} could not be created, ${err}`)
@@ -30,7 +30,7 @@ router.route('/').post((req, res) => {
 
 router.route('/:id/update').post((req, res) => {
 	const query = {'_id': req.params.id}
-	const newEntity = {'_id': req.params.id, fileName: req.body.fileName, productName: req.body.productName, price: req.body.price}
+	const newEntity = {'_id': req.params.id, fileName: req.body.fileName, productName: req.body.productName, price: req.body.price, category: req.body.category}
 	products.findOneAndUpdate(query, newEntity, {upsert: true, async: true}, (err, dock) => {
 		if (err) {
 			console.log(err);

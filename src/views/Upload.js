@@ -4,20 +4,10 @@ import { Redirect } from 'react-router-dom';
 import UploadContainer from '../components/UploadContainer';
 import {UploadStyle} from "../css/Upload.css"
 
-function handleAdd(){
-	//Loop through every item added and post to server
-}
-
-function handleSave(){
-	//Loop through every item in the list
-	//Check to see if different from when arrived
-	//If different, post to server
-}
-
 function Upload() {
 	const [actionValue, setActionValue] = useState("default");
 	const [categoryValue, setCategoryValue] = useState("default");
-	const button = null;
+	let button = null;
 
 	const handleActionChange = (e) => {
 		setActionValue(e.target.value);
@@ -25,6 +15,7 @@ function Upload() {
 	}
 
 	const handleCategoryChange = (e) => {
+		setActionValue(actionValue)
 		setCategoryValue(e.target.value);
 		if (actionValue === 'add' && categoryValue !== 'default') {
 			button = <button>Add</button>
