@@ -1,5 +1,3 @@
-@import url(//fonts.googleapis.com/css?family=Pacifico);
-
 @font-face {
 	font-family: 'Bradley Hand ITC';
 	src: local('BRADHITC'), url(../fonts/BRADHITC.TTF) format('truetype');
@@ -46,7 +44,3 @@ a:hover {
 	min-height: calc(100vh - 120px);
 	display: flex;
 }
-
-
-
-
