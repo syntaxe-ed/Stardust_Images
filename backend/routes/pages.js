@@ -1,6 +1,17 @@
 const router = require('express').Router();
 let galleryPages = require('../models/pages.model');
 
+router.route('/parent/:page').get((req, res) => {
+	const words = req.params.page.replace('_', ' ')
+	console.log(words);
+	galleryPages.find({title: new RegExp(`^${words}$`, 'i')})
+		.then((galleryPages) => {
+			console.log(galleryPages);
+			res.json(galleryPages[0].parentPage)
+		})
+		.catch(err => res.status(400).json('Error: ' + err))
+})
+
 router.route('/:id').get((req, res) => {
 	galleryPages.find({parentPage: req.params.id})
 		.then((galleryPages) => {

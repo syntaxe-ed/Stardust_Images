@@ -12,6 +12,7 @@ import axios from 'axios'
 import GalleryPage from './views/Gallery/galleryPage';
 import Upload from './views/Upload';
 import Login from './views/Login';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 class App extends Component {
   render(){
@@ -24,7 +25,7 @@ class App extends Component {
                     <Route exact path="/gallery/:galleryTitle?/:subGalleryTitle?/:eventTitle?" render={(props) => <GalleryPage {...props} page='Gallery'/>}/>
                     <Route path="/about" component={About} />
                     <Route path="/contact" component={Contact} />
-                    <Route path="/search/:id" children={new Search} />
+                    <Route path="/search/:id" component={Search} />
                     <Route path="/upload" component={Upload} />
                     <Route path="/login" component={Login} /> 
                     <Route component={NoMatch} />
