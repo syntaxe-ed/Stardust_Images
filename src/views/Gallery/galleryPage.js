@@ -102,7 +102,7 @@ class GalleryPage extends React.Component {
 			if (currentPhoto.galleryTitle === title) {
 				i++;
 				if (photos.length === 0){
-					return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName} key={currentPhoto._id}/>
+					return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName + '/'} key={currentPhoto._id}/>
 				}
 				let ref = `${title}/` + currentPhoto.reference.toLowerCase()
 				return <ImageCard small={12} large={photos.length > 2 ? 4 : 6} reference={ref} photo={currentPhoto.fileName} text={currentPhoto.fileName} folder={this.state.fileName} key={currentPhoto._id} />

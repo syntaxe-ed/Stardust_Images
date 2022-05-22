@@ -57,7 +57,6 @@ class SearchComponent extends React.Component {
 					.then(response => {
 						if (response.data !== 'gallery') {
 							galleryTitle = response.data + '/' + galleryTitle;
-							console.log('gallery', galleryTitle);
 						}
 						this.setState({
 							title: response.data
