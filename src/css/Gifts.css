@@ -1,4 +1,45 @@
-.giftsContainer {
+@font-face {
+	font-family: 'Bradley Hand ITC';
+	src: local('BRADHITC'), url(../fonts/BRADHITC.TTF) format('truetype');
+}
+
+.imageCard {
+	padding-top: 2%;
+	padding-bottom: 2%;
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+	display: flex;
+}
+
+.imageCard:hover {
+	opacity: 0.4;
+}
+
+.imageCardText {
+	font-family: 'Bradley Hand ITC';
+	font-weight: bold;
+	padding: 10px;
+	outline: none;
+}
+
+.imageCardImage {
+	width: 100%;
+}
+
+.galleryRow {
+	align-self: center;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: black;
+}
+
+.galleryContainer {
 	margin-top: 10px;
 	min-height: calc(100vh - 120px);
 	display: flex;
