@@ -15,7 +15,6 @@ class Gifts extends React.Component {
 		await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/products/pages`)
 			.then(response => {
                 const pages = [];
-				console.log(response.data);
                 for (const page of response.data) {
                     pages.push(<ImageCard small={12} large={response.data.length > 2 ? 4 : 6} reference={'/gifts/' + page.reference} photo={'Comissions'} text={page.title} folder={'events'} key={page._id} />)
                 }
