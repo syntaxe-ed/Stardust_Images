@@ -46,14 +46,12 @@ class NavigationBar extends React.Component{
 						<Nav.Item><Nav.Link href="/about">About</Nav.Link></Nav.Item>
 						<Nav.Item><Nav.Link href="/gallery">Gallery</Nav.Link></Nav.Item>
 						<Nav.Item><Nav.Link href="/gifts">Gifts</Nav.Link></Nav.Item>
-						<Nav.Item><Nav.Link href="/contact">Contact</Nav.Link></Nav.Item>
+						{/* <Nav.Item><Nav.Link href="/contact">Contact</Nav.Link></Nav.Item> */}
 						<Nav.Item><Nav.Link href="https://stardustimagesblog.wordpress.com/">Blog</Nav.Link></Nav.Item>
 					</Nav>
 					<Nav className="ml-auto" onSubmit={this.handleSubmit}>
 						<Form inline >
 							<FormControl placeholder="Search" className = "mr-sm-2" onChange={this.handleChange} value={this.state.searchText}/>
-							<br></br><br></br>
-							{/* <Button className="btn btn-secondary mx-auto" type="submit">Submit</Button> */}
 						</Form>
 					</Nav>
 				</Navbar.Collapse>
