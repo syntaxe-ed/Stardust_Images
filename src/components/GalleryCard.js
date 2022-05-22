@@ -3,7 +3,7 @@ import {Row, Col, Nav, Modal, Button, Container} from 'react-bootstrap'
 import exhibitionStyle from '../css/Exhibitions.css'
 
 function GalleryCard(props) {
-		let image = require(`../img/${props.folder}/${props.photo}.jpg`)
+		let image = require(`../img/${props.folder}${props.photo}.jpg`)
 		let image2 = new Image()
         image2.src = image
         let vertical = false

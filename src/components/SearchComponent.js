@@ -3,6 +3,7 @@ import axios from 'axios'
 import ImageCard from './ImageCard'
 import GalleryCard from './GalleryCard'
 import { Row, Container } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom';
 import searchStyle from '../css/Search.css'
 import usePromise from 'react-promise'
 
@@ -12,7 +13,9 @@ class SearchComponent extends React.Component {
 
 		this.state = {
 			photos: [],
-			items: null
+			items: [],
+			title: '',
+			render: null,
 		}
 
 		this.searchForItem = this.searchForItem.bind(this);
@@ -21,7 +24,7 @@ class SearchComponent extends React.Component {
 
 
 	componentDidMount() {
-		axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery`)
+		axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery/search/${this.props.searchTerm}`)
 			.then(response => {
 				this.setState({
 					photos: response.data
@@ -33,58 +36,65 @@ class SearchComponent extends React.Component {
 			})
 	}
 
-	searchForItem() {
-		let searchTerm = this.props.searchTerm;
-		let keyWords = []
-		let currentWord = ''
+	async searchForItem() {
 		let ref = ''
-		let galleryTitle = ''
+		let items = [];
 
-		const items = [];
 		for (const currentPhoto of this.state.photos) {
-			if (currentPhoto.keywords) {
-				keyWords = currentPhoto.keywords.split(',')
+			let galleryTitle = currentPhoto.galleryTitle.toString() + '/';
+			if (currentPhoto.galleryTitle === "gallery") {
+				ref = '/gallery/' + currentPhoto.reference
+			} else {
+				ref = '/gallery/' + currentPhoto.galleryTitle + '/' + currentPhoto.reference
 			}
 
-			for (let i = 0; i < keyWords.length; i++) {
-				currentWord = keyWords[i].trim()
-				if (currentWord.toLowerCase() === searchTerm.toLowerCase()) {
-					if (currentWord.galleryTitle === "gallery") {
-						ref = '/gallery/' + currentPhoto.reference
-					} else {
-						ref = '/gallery/' + currentPhoto.galleryTitle + '/' + currentPhoto.reference
-					}
-
-					if (currentPhoto.reference === "") {
-						let title = currentPhoto.galleryTitle.toLowerCase();
-						while (title !== "gallery") {
-							axios.get(`${process.env.REACT_APP_IP_ADDRESS}/pages/parent/${title}`)
-								.then(response => {
-									galleryTitle = response.data + '/' + galleryTitle;
-									title = response.data;
-								})
-								.catch((error) => {
-									console.log(error)
-								});
+			if (currentPhoto.reference === "") {
+				this.setState({
+					title: currentPhoto.galleryTitle.toString().toLowerCase()
+				})
+				while (this.state.title !== 'gallery') {
+					await axios.get(`${process.env.REACT_APP_IP_ADDRESS}/pages/parent/${this.state.title}`)
+					.then(response => {
+						if (response.data !== 'gallery') {
+							galleryTitle = response.data + '/' + galleryTitle;
+							console.log('gallery', galleryTitle);
 						}
-						items.push(<GalleryCard small={12} large={3} photo={currentPhoto.fileName} folder={galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id} />)
-					} else {
-						items.push(<ImageCard small={12} large={3} reference={ref} photo={currentPhoto.fileName} folder={currentPhoto.galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id} />)
-					}
+						this.setState({
+							title: response.data
+						})
+					})
+					.catch((error) => {
+						console.log(error)
+					});
 				}
+				items.push(<GalleryCard small={12} large={3} photo={currentPhoto.fileName} folder={galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id} />)
+			} else {
+				items.push(<ImageCard small={12} large={3} reference={ref} photo={currentPhoto.fileName} folder={currentPhoto.galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id} />)
 			}
-
 		}
-		return items;
+
+		this.setState({
+			items: items
+		})
+
+		if (this.state.items.length > 0) {
+			this.setState({
+				render: <Container fluid className="searchContainer">
+							<Row>
+								{this.state.items}
+							</Row>
+						</Container>
+			})
+		} else {
+			this.setState({
+				render: <Redirect to={{pathname: '/error'}} />
+			})
+		}
 	}
 
 	render() {
-		return (
-			<Container fluid className="searchContainer">
-				<Row>
-					{this.state.itemss}
-				</Row>
-			</Container>
+		return ( 
+			<div>{this.state.render}</div>
 		)
 	}
 }

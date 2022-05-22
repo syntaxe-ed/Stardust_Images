@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const photosModel = require ('../models/photos.model');
 
+router.route('/search/:keyword').get((req, res) => {
+	photosModel.find({keywords: {$regex: new RegExp(req.params.keyword, "i")}})
+	.then(photos => res.json(photos))
+	.catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.route('/:id').get((req, res) => {
 	photosModel.find({galleryTitle: req.params.id})
 		.then(photos => res.json(photos))
