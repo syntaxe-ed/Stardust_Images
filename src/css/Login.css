@@ -1,0 +1,44 @@
+.form-group {
+    text-align: center;
+    align-content: center;
+    margin: auto;
+}
+
+.login-row {
+    padding-bottom: 20px;
+}
+
+.formContainer {
+	min-height: calc(100vh - 110px);
+    display: flex;
+}
+
+
+.btn-primary {
+    background-color: grey;
+    border-color: grey;
+    margin-top: 10%;
+    width: 25%;
+}
+
+.btn-primary:hover {
+    background-color: grey;
+    border-color: grey;
+    opacity: 0.5;
+}
+
+.username {
+    margin-left: 20px;
+    width: 50%;
+    border-color: grey;
+}
+
+.password {
+    margin-left: 20px;
+    width: 50%;
+    border-color: grey;
+}
+
+.control-label:active {
+    border-color: grey;
+}

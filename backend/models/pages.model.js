@@ -12,6 +12,11 @@ const galleryPagesSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    fileName: {
+        type: String,
+        required: true,
+        trim: true
     }
 })
 

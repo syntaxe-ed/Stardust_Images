@@ -2,15 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import ImageCard from './ImageCard'
 import GalleryCard from './GalleryCard'
-import {Row, Container} from 'react-bootstrap'
+import { Row, Container } from 'react-bootstrap'
 import searchStyle from '../css/Search.css'
+import usePromise from 'react-promise'
 
 class SearchComponent extends React.Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			photos: []
+			photos: [],
+			items: null
 		}
 
 		this.searchForItem = this.searchForItem.bind(this);
@@ -19,25 +21,27 @@ class SearchComponent extends React.Component {
 
 
 	componentDidMount() {
-	    axios.get('http://192.168.1.113:5000/gallery')
-	      .then(response => {
-	        this.setState ({
-	          photos: response.data
-	        })
-	      })
-	      .catch((error) => {
-	        console.log(error)
-	      })
-  	}
+		axios.get(`${process.env.REACT_APP_IP_ADDRESS}/gallery`)
+			.then(response => {
+				this.setState({
+					photos: response.data
+				})
+				this.searchForItem();
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
 
-  	searchForItem() {
+	searchForItem() {
 		let searchTerm = this.props.searchTerm;
 		let keyWords = []
 		let currentWord = ''
 		let ref = ''
 		let galleryTitle = ''
 
-		return this.state.photos.map(currentPhoto => {
+		const items = [];
+		for (const currentPhoto of this.state.photos) {
 			if (currentPhoto.keywords) {
 				keyWords = currentPhoto.keywords.split(',')
 			}
@@ -46,31 +50,39 @@ class SearchComponent extends React.Component {
 				currentWord = keyWords[i].trim()
 				if (currentWord.toLowerCase() === searchTerm.toLowerCase()) {
 					if (currentWord.galleryTitle === "gallery") {
-						ref = '/gallery/' + currentPhoto.reference 
+						ref = '/gallery/' + currentPhoto.reference
 					} else {
 						ref = '/gallery/' + currentPhoto.galleryTitle + '/' + currentPhoto.reference
 					}
 
 					if (currentPhoto.reference === "") {
-						if (currentPhoto.galleryTitle.toLowerCase() === "exhibitions"){
-							galleryTitle = "events/Exhibitions"
+						let title = currentPhoto.galleryTitle.toLowerCase();
+						while (title !== "gallery") {
+							axios.get(`${process.env.REACT_APP_IP_ADDRESS}/pages/parent/${title}`)
+								.then(response => {
+									galleryTitle = response.data + '/' + galleryTitle;
+									title = response.data;
+								})
+								.catch((error) => {
+									console.log(error)
+								});
 						}
-						return <GalleryCard small={12} large={3} photo={currentPhoto.fileName} folder={galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id}/>
+						items.push(<GalleryCard small={12} large={3} photo={currentPhoto.fileName} folder={galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id} />)
 					} else {
-						return <ImageCard small={12} large={3} reference={ref} photo={currentPhoto.fileName} folder={currentPhoto.galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id}/>
+						items.push(<ImageCard small={12} large={3} reference={ref} photo={currentPhoto.fileName} folder={currentPhoto.galleryTitle} text={currentPhoto.fileName} key={currentPhoto._id} />)
 					}
-
-					
 				}
 			}
-		})
+
+		}
+		return items;
 	}
 
 	render() {
 		return (
 			<Container fluid className="searchContainer">
 				<Row>
-					{this.searchForItem()}
+					{this.state.itemss}
 				</Row>
 			</Container>
 		)

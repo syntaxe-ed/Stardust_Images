@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'Bradley Hand ITC';
+	src: local('BRADHITC'), url(../fonts/BRADHITC.TTF) format('truetype');
+}
+
+button {
+    background-color: pink;
+}

@@ -1,0 +1,50 @@
+.uploadContainer {
+    min-height: calc(100vh - 110px);
+	display: flex;
+}
+
+.selectBox {
+    text-align: center;
+    min-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fluidContainer {
+    text-align: center;
+    max-height: calc(100vh - 110px);
+}
+
+.title {
+    margin: auto;
+}
+
+.rowContainer {
+    height: 94%;
+    padding-bottom: 0;
+    display: flex;
+}
+
+.taskbar {
+    height: 5%;
+    margin-top: 1%;
+}
+
+.tableInput, .tableInput:active {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    text-align: center;
+    width: 100%;
+}
+
+.table td, .table th {
+    padding: 2px;
+}
+
+.saveButton {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+}
