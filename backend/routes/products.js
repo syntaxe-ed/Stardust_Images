@@ -1,5 +1,14 @@
 const router = require('express').Router();
 const products = require('../models/products.model');
+const productCategories = require('../models/productCategories.model');
+
+router.route('/pages').get((req, res) => {
+	productCategories.find()
+		.then((productCategories) => {
+			res.json(productCategories)
+		})
+		.catch(err => res.status(400).json('Error: ' + err));
+})
 
 router.route('/:id').get((req, res) => {
 	products.find({productName: req.params.id})
