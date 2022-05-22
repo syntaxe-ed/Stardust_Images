@@ -28,6 +28,7 @@ class App extends Component {
                     <Route path="/search/:id" component={Search} />
                     <Route path="/upload" component={Upload} />
                     <Route path="/login" component={Login} /> 
+                    <Route path ="/error" component={NoMatch} />
                     <Route component={NoMatch} />
                 </Switch>
             </Router>

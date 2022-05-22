@@ -3,6 +3,7 @@ import axios from 'axios'
 import ImageCard from './ImageCard'
 import GalleryCard from './GalleryCard'
 import { Row, Container } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom';
 import searchStyle from '../css/Search.css'
 import usePromise from 'react-promise'
 
@@ -12,8 +13,9 @@ class SearchComponent extends React.Component {
 
 		this.state = {
 			photos: [],
-			items: null,
-			title: ''
+			items: [],
+			title: '',
+			render: null,
 		}
 
 		this.searchForItem = this.searchForItem.bind(this);
@@ -74,15 +76,25 @@ class SearchComponent extends React.Component {
 		this.setState({
 			items: items
 		})
+
+		if (this.state.items.length > 0) {
+			this.setState({
+				render: <Container fluid className="searchContainer">
+							<Row>
+								{this.state.items}
+							</Row>
+						</Container>
+			})
+		} else {
+			this.setState({
+				render: <Redirect to={{pathname: '/error'}} />
+			})
+		}
 	}
 
 	render() {
-		return (
-			<Container fluid className="searchContainer">
-				<Row>
-					{this.state.items}
-				</Row>
-			</Container>
+		return ( 
+			<div>{this.state.render}</div>
 		)
 	}
 }
