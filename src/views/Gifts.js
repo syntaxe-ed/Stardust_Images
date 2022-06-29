@@ -10,10 +10,11 @@ class Gifts extends React.Component {
 
     constructor(props) {
 		super(props)
-		this.state = { pages: []};
+		this.state = { pages: [], cardType: 'gallery'};
 	}
 
     async componentDidMount() {
+        setTimeout(() => {}, 10)
         if (this.props.match.params.productTitle) {
             await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/products/pages`)
 			.then(response => {
@@ -23,6 +24,9 @@ class Gifts extends React.Component {
                 }
                 this.setState({
                     pages: pages
+                })
+                this.setState({
+                    cardType: 'gallery'
                 })
 			})
 			.catch((error) => {
@@ -38,6 +42,9 @@ class Gifts extends React.Component {
                 this.setState({
                     pages: pages
                 })
+                this.setState({
+                    cardType: 'image'
+                })
 			})
 			.catch((error) => {
 				console.log(error)
@@ -48,8 +55,8 @@ class Gifts extends React.Component {
 
     render() {
         return (
-            <Container fluid className="galleryContainer">
-                <Row className="galleryRow">
+            <Container fluid className={this.state.cardType === 'image' ? "galleryContainer" : "exhibitionContainer"} onContextMenu={(e) => e.preventDefault()}>
+				<Row className={this.state.cardType === 'image' ? "galleryRow": ""}>
 					<Nav>
 						{this.state.pages}
 					</Nav>

@@ -1,7 +1,8 @@
 .galleryCard {
-	width: 100%;
+	max-width: 100%;
 	padding-top: 0.75%;
 	padding-bottom: 0.75%;
+	display: block;
 }
 
 .galleryCard:hover {
@@ -10,18 +11,13 @@
 }
 
 .galleryCardImage {
-	/* width: 100%; */
+	/* max-width: 100%; */
 	height: 20vh;
-}
-
-.exhibitionsRow {
-	align-self: center;
 }
 
 .exhibitionContainer {
 	margin-top: 10px;
 	min-height: calc(100vh - 120px);
-	display: flex;
 }
 
 .modal {

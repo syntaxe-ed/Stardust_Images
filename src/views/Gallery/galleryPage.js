@@ -124,11 +124,11 @@ class GalleryPage extends React.Component {
 	render() {
 		return (
 			<Container fluid className={this.state.links ? "galleryContainer" : "exhibitionContainer"} onContextMenu={(e) => e.preventDefault()}>
-				<Row className={this.state.links ? "galleryRow": "exhibitionRow"}>
+				<div className={this.state.links ? "galleryRow": ""}>
 					<Nav>
 						{this.state.displayPhotos}
 					</Nav>
-				</Row>
+				</div>
 			</Container>
 		)
 	}
