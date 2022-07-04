@@ -19,7 +19,7 @@ class Gifts extends React.Component {
 			.then(response => {
                 const pages = [];
                 for (const page of response.data) {
-                    pages.push(<GalleryCard small={12} large={3} photo={page.fileName} text={page.title} folder={`products/${page.category.toLowerCase().replace(/ /g, '_')}/`} key={page._id}/>)
+                    pages.push(<GalleryCard small={12} large={3} photo={page.fileName} text={page.title} folder={`products/${page.category.toLowerCase().replace(/ /g, '_')}/`} key={page._id} cost={page.price}/>)
                 }
                 this.setState({
                     pages: pages

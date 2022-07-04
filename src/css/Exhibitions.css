@@ -40,6 +40,16 @@
 	align-self: center;
 }
 
+.purchase-gift {
+	text-align: center;
+	align-self: end !important; 
+}
+
+.gift-button {
+	width: 100% !important;
+	margin-top: 2% !important;
+}
+
 .selectBox {
 	width: 75%;
 }

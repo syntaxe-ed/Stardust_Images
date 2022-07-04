@@ -31,49 +31,61 @@ function GalleryCard(props) {
 				<Modal show={show} onHide={handleClose} dialogClassName="modal">
 			        <Modal.Header closeButton>
 			        	<Modal.Title>
-			        		Purchase Image
+			        		Purchase {props.folder.includes('products') ? 'Item' : 'Image'}
 			        	</Modal.Title>
 			        </Modal.Header>
 
 			        <Modal.Body className='display-container'>
 			        	<Row>
-				        	<Col sm={12} lg={8}>
+				        	<Col sm={12} lg={props.folder.includes('products') ? 10 : 8}>
 				        		<img className='display-image'
 						        	src={image}
 						        	style={vertical ? {'maxWidth': '100%'} : {'maxWidth': '44.5%'}}
 					        	/>
 				        	</Col>
 
-				        	<Col sm={12} lg={4} className="purchase">
-								<Row className="purchase-row">
-									<Col sm={6} lg={4}>
-										<p>Style: </p>
-									</Col>
-									<Col sm={6} lg={8}>
-										<select name="material" id="material" className="selectBox rounded-pill" value={material} onChange={(d) => {setMaterial(d.target.value)}}>
-											<option value="Canvas">Canvas</option>
-											<option value="Print">Print</option>
-										</select>
-									</Col>
-								</Row>
-								<Row className="purchase-row">
-									<Col sm={6} lg={4}>
-										<p>Size: </p>
-									</Col>
-									<Col sm={6} lg={8}>
-										<select name="style" id="style" className="selectBox rounded-pill" value={size} onChange={(d) => {setSize(d.target.value)}}>
-											<option value="Small">Small</option>
-											<option value="Medium">Medium</option>
-											<option value="Large">Large</option>
-										</select>
-									</Col>
-								</Row>
-				        		<Button onClick={handleClose} className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="50.00" data-item-url="/" data-item-name={name}
-								 data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print[-5.00]" data-item-custom1-value={material}
-								 data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+10.00]|Large[+20.00]" data-item-custom2-value={size}>
-				        			Add to Basket
-				        		</Button>
-				        	</Col>
+							{props.folder.includes('products') ? (
+								<Col sm={12} lg={2} className="purchase-gift">
+									<h1>£{(+props.cost).toFixed(2)}</h1>
+									<Button onClick={handleClose} className="gift-button buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price={props.cost} data-item-url="/" data-item-name={name}
+									data-item-image={image}>
+										Add to Basket
+									</Button>
+								</Col>
+							) : (
+								<Col sm={12} lg={4} className="purchase">
+									<Row className="purchase-row">
+										<Col sm={6} lg={4}>
+											<p>Style: </p>
+										</Col>
+										<Col sm={6} lg={8}>
+											<select name="material" id="material" className="selectBox rounded-pill" value={material} onChange={(d) => {setMaterial(d.target.value)}}>
+												<option value="Canvas">Canvas</option>
+												<option value="Print">Print</option>
+											</select>
+										</Col>
+									</Row>
+									<Row className="purchase-row">
+										<Col sm={6} lg={4}>
+											<p>Size: </p>
+										</Col>
+										<Col sm={6} lg={8}>
+											<select name="style" id="style" className="selectBox rounded-pill" value={size} onChange={(d) => {setSize(d.target.value)}}>
+												<option value="Small">Small</option>
+												<option value="Medium">Medium</option>
+												<option value="Large">Large</option>
+											</select>
+										</Col>
+									</Row>
+									<Button onClick={handleClose} className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="50.00" data-item-url="/" data-item-name={name}
+									data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print[-5.00]" data-item-custom1-value={material}
+									data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+10.00]|Large[+20.00]" data-item-custom2-value={size}>
+										Add to Basket
+									</Button>
+				        		</Col>
+							)}
+
+				        	
 			        	</Row>
 			        </Modal.Body>
 
