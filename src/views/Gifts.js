@@ -18,9 +18,10 @@ class Gifts extends React.Component {
             await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/products/${this.props.match.params.productTitle}`)
 			.then(response => {
                 const pages = [];
-                for (const page of response.data) {
-                    pages.push(<GalleryCard small={12} large={3} photo={page.fileName} text={page.title} folder={`products/${page.category.toLowerCase().replace(/ /g, '_')}/`} key={page._id} cost={page.price}/>)
-                }
+                response.data.forEach((page, i) => {
+                    pages.push(<GalleryCard small={12} large={3} index={i} items={response.data} photo={page.image} text={page.title} folder={page.folder} key={page._id} cost={page.cost}/>)
+                })
+
                 this.setState({
                     pages: pages
                 })

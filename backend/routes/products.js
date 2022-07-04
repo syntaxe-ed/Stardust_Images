@@ -13,7 +13,17 @@ router.route('/pages').get((req, res) => {
 router.route('/all').get((req, res) => {
 	products.find()
 		.then((products) => {
-            res.json(products)
+			const newProducts = products.map((product) => {
+				return {
+					folder: `products/${product.category.toLowerCase().replace(/ /g, '_')}/`,
+					image: product.fileName,
+					cost: product.price,
+					id: product._id,
+					name: product.productName,
+					category: product.category
+				}
+			})
+            res.json(newProducts)
         })
 		.catch(err => res.status(400).json('Error: ' + err))
 });
@@ -21,7 +31,17 @@ router.route('/all').get((req, res) => {
 router.route('/:id').get((req, res) => {
 	products.find({category: req.params.id.toLowerCase().replace('_', ' ')})
 		.then((products) => {
-            res.json(products)
+			const newProducts = products.map((product) => {
+				return {
+					folder: `products/${product.category.toLowerCase().replace(/ /g, '_')}/`,
+					image: product.fileName,
+					cost: product.price,
+					id: product._id,
+					name: product.productName,
+					category: product.category
+				}
+			})
+            res.json(newProducts)
         })
 		.catch(err => res.status(400).json('Error: ' + err))
 });

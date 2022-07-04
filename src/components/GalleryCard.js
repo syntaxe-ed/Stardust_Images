@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Row, Col, Nav, Modal, Button, Container} from 'react-bootstrap'
 import exhibitionStyle from '../css/Exhibitions.css'
 
 function GalleryCard(props) {
-		let image = require(`../img/${props.folder}${props.photo}.jpg`)
+		const [index, setIndex] = useState(props.index);
+
+		let imageThumb = require(`../img/${props.folder}${props.photo}.jpg`)
+
+		let image = require(`../img/${props.items[index].folder}${props.items[index].image}.jpg`)
 		let image2 = new Image()
         image2.src = image
         let vertical = false
         if (image2.height <  image2.width) {
             vertical = true
         }
-
 		const [show, setShow] = React.useState(false);
   		const handleClose = () => setShow(false);
   		const handleShow = () => setShow(true);
+		const test = () => setIndex(index < props.items.length - 1 ? index + 1 : 0);
 		const [material, setMaterial] = React.useState('Canvas');
 		const [size, setSize] = React.useState('Small');
 		const name = image.split('/')[3].split('.')[0]
@@ -22,7 +26,7 @@ function GalleryCard(props) {
 				<Col sm={props.small} lg={vertical ? 2 : 1} className="galleryCard">
 						<div  onClick={handleShow}>
 							<img 
-								src={image}
+								src={imageThumb}
 								className="galleryCardImage"
 							/> 
 						</div>
@@ -46,11 +50,12 @@ function GalleryCard(props) {
 
 							{props.folder.includes('products') ? (
 								<Col sm={12} lg={2} className="purchase-gift">
-									<h1>£{(+props.cost).toFixed(2)}</h1>
-									<Button onClick={handleClose} className="gift-button buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price={props.cost} data-item-url="/" data-item-name={name}
+									<h1>£{(props.items[index].cost).toFixed(2)}</h1>
+									<Button onClick={handleClose} className="gift-button buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price={props.items[index].cost} data-item-url="/" data-item-name={name}
 									data-item-image={image}>
 										Add to Basket
 									</Button>
+									<Button onClick={test}>Test</Button>
 								</Col>
 							) : (
 								<Col sm={12} lg={4} className="purchase">
@@ -93,6 +98,11 @@ function GalleryCard(props) {
 		      	</Modal>
 			</>
 		);
+}
+
+function useForceUpdate(){
+	const [value, setValue] = useState(0);
+	return () => setValue(value => value + 1)
 }
 
 export default GalleryCard
