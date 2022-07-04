@@ -25,7 +25,6 @@ class App extends Component {
                     <Route exact path="/gallery/:galleryTitle?/:subGalleryTitle?/:eventTitle?" render={(props) => <GalleryPage {...props} page='Gallery'/>}/>
                     <Route path="/about" component={About} />
                     <Route path="/gifts/:productTitle?" render={(props) => <Gifts {...props} />}/>
-                    {/* <Route path="/contact" component={Contact} /> */}
                     <Route path="/search/:id" component={Search} />
                     <Route path="/upload" component={Upload} />
                     <Route path="/login" component={Login} /> 

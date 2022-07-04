@@ -10,16 +10,16 @@ router.route('/pages').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 })
 
-router.route('/:id').get((req, res) => {
-	products.find({productName: req.params.id})
+router.route('/all').get((req, res) => {
+	products.find()
 		.then((products) => {
             res.json(products)
         })
 		.catch(err => res.status(400).json('Error: ' + err))
 });
 
-router.route('/').get((req, res) => {
-	products.find()
+router.route('/:id').get((req, res) => {
+	products.find({category: req.params.id.toLowerCase().replace('_', ' ')})
 		.then((products) => {
             res.json(products)
         })

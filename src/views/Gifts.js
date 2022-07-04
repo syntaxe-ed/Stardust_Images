@@ -14,13 +14,12 @@ class Gifts extends React.Component {
 	}
 
     async componentDidMount() {
-        setTimeout(() => {}, 10)
         if (this.props.match.params.productTitle) {
-            await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/products/pages`)
+            await Axios.get(`${process.env.REACT_APP_IP_ADDRESS}/products/${this.props.match.params.productTitle}`)
 			.then(response => {
                 const pages = [];
                 for (const page of response.data) {
-                    pages.push(<GalleryCard small={12} large={3} photo={'Comissions'} text={page.title} folder={'events/'} key={page._id}/>)
+                    pages.push(<GalleryCard small={12} large={3} photo={page.fileName} text={page.title} folder={`products/${page.category.toLowerCase().replace(/ /g, '_')}/`} key={page._id}/>)
                 }
                 this.setState({
                     pages: pages
