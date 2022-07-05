@@ -16,6 +16,17 @@ router.route('/:id').get((req, res) => {
 router.route('/').get((req, res) => {
 	photosModel.find()
 		.then(photos => res.json(photos))
+		.then((photos) => {
+			const newPhotos = photos.map((product) => {
+				return {
+					folder: product.fileName + '/',
+					image: product.fileName,
+					galleryTitle: product.galleryTitle,
+					reference: product.reference
+				}
+			})
+            res.json(newPhotos)
+        })
 		.catch(err => res.status(400).json('Error: ' + err))
 });
 
