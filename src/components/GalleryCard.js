@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Row, Col, Nav, Modal, Button, Container} from 'react-bootstrap'
+import {Row, Col, Nav, Modal, Button, Container, Carousel} from 'react-bootstrap'
 import exhibitionStyle from '../css/Exhibitions.css'
 
 function GalleryCard(props) {
@@ -14,10 +14,18 @@ function GalleryCard(props) {
         if (image2.height <  image2.width) {
             vertical = true
         }
+
+		let images = [];
+		for(let i = 0; i < props.items.length; i++) {
+			images.push(<Carousel.Item><img src={require(`../img/${props.items[i].folder}${props.items[i].image}.jpg`)} className='display-image' style={vertical ? {'maxWidth': '100%'} : {'maxWidth': '44.5%'}}/> </Carousel.Item>);
+		}
+
 		const [show, setShow] = React.useState(false);
   		const handleClose = () => setShow(false);
   		const handleShow = () => setShow(true);
-		const test = () => setIndex(index < props.items.length - 1 ? index + 1 : 0);
+		const onClick = (eventKey, event) => {
+			setIndex(eventKey);
+		};
 		const [material, setMaterial] = React.useState('Canvas');
 		const [size, setSize] = React.useState('Small');
 		const name = image.split('/')[3].split('.')[0]
@@ -42,10 +50,14 @@ function GalleryCard(props) {
 			        <Modal.Body className='display-container'>
 			        	<Row>
 				        	<Col sm={12} lg={props.folder.includes('products') ? 10 : 8}>
-				        		<img className='display-image'
+				        		{/* <img className='display-image'
 						        	src={image}
 						        	style={vertical ? {'maxWidth': '100%'} : {'maxWidth': '44.5%'}}
-					        	/>
+					        	/> */}
+								<Carousel className="CarouselHolder" interval={null} keyboard={true} activeIndex={index}
+									onSelect={(eventKey, event) => {onClick(eventKey, event)}}>
+									{images}
+								</Carousel>
 				        	</Col>
 
 							{props.folder.includes('products') ? (
@@ -55,7 +67,6 @@ function GalleryCard(props) {
 									data-item-image={image}>
 										Add to Basket
 									</Button>
-									<Button onClick={test}>Test</Button>
 								</Col>
 							) : (
 								<Col sm={12} lg={4} className="purchase">
