@@ -116,7 +116,7 @@ class GalleryPage extends React.Component {
 
 
 			images.push(<Carousel.Item><img src={require(`../../img/${this.state.fileName + '/'}${currentPhoto.fileName}.jpg`)} className='display-image'
-				style={vertical ? { 'maxWidth': '100%' } : { 'maxWidth': '44.5%' }}
+				style={{ 'maxWidth': '100%' }}
 			/> </Carousel.Item>);
 		})).then(() => {})
 

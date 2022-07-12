@@ -34,7 +34,7 @@ class Gifts extends React.Component {
 
 
                     images.push(<Carousel.Item><img src={require(`../img/${response.data[i].folder}${response.data[i].image}.jpg`)} className='display-image' 
-                    style={vertical ? {'maxWidth': '100%'} : {'maxWidth': '44.5%'}}
+                    style={{ 'maxWidth': '100%' }}
                     /> </Carousel.Item>);
                 }
 
