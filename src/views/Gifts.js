@@ -39,7 +39,7 @@ class Gifts extends React.Component {
                 }
 
                 response.data.forEach((page, i) => {
-                    pages.push(<GalleryCard name={names[i]} vertical={verticals[i]} small={12} large={3} index={i} items={response.data} images={images} photo={page.image} text={page.title} folder={page.folder} key={page._id} cost={page.cost}/>)
+                    pages.push(<GalleryCard name={names[i]} image={require(`../img/${page.folder}${page.image}.jpg`)} vertical={verticals[i]} small={12} large={3} index={i} items={response.data} images={images} photo={page.image} text={page.title} folder={page.folder} key={page._id} cost={page.cost}/>)
                 })
 
                 this.setState({
