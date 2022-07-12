@@ -4,21 +4,7 @@ import exhibitionStyle from '../css/Exhibitions.css'
 
 function GalleryCard(props) {
 		const [index, setIndex] = useState(props.index);
-
 		let imageThumb = require(`../img/${props.folder}${props.photo}.jpg`)
-
-		let image = require(`../img/${props.items[index].folder}${props.items[index].image}.jpg`)
-		let image2 = new Image()
-        image2.src = image
-        let vertical = false
-        if (image2.height <  image2.width) {
-            vertical = true
-        }
-
-		let images = [];
-		for(let i = 0; i < props.items.length; i++) {
-			images.push(<Carousel.Item><img src={require(`../img/${props.items[i].folder}${props.items[i].image}.jpg`)} className='display-image' style={vertical ? {'maxWidth': '100%'} : {'maxWidth': '44.5%'}}/> </Carousel.Item>);
-		}
 
 		const [show, setShow] = React.useState(false);
   		const handleClose = () => setShow(false);
@@ -28,10 +14,10 @@ function GalleryCard(props) {
 		};
 		const [material, setMaterial] = React.useState('Canvas');
 		const [size, setSize] = React.useState('Small');
-		const name = image.split('/')[3].split('.')[0]
+		
 		return(
 			<>
-				<Col sm={props.small} lg={vertical ? 2 : 1} className="galleryCard">
+				<Col sm={props.small} lg={props.vertical ? 2 : 1} className="galleryCard">
 						<div  onClick={handleShow}>
 							<img 
 								src={imageThumb}
@@ -50,21 +36,17 @@ function GalleryCard(props) {
 			        <Modal.Body className='display-container'>
 			        	<Row>
 				        	<Col sm={12} lg={props.folder.includes('products') ? 10 : 8}>
-				        		{/* <img className='display-image'
-						        	src={image}
-						        	style={vertical ? {'maxWidth': '100%'} : {'maxWidth': '44.5%'}}
-					        	/> */}
 								<Carousel className="CarouselHolder" interval={null} keyboard={true} activeIndex={index}
 									onSelect={(eventKey, event) => {onClick(eventKey, event)}}>
-									{images}
+									{props.images}
 								</Carousel>
 				        	</Col>
 
 							{props.folder.includes('products') ? (
 								<Col sm={12} lg={2} className="purchase-gift">
 									<h1>£{(props.items[index].cost).toFixed(2)}</h1>
-									<Button onClick={handleClose} className="gift-button buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price={props.items[index].cost} data-item-url="/" data-item-name={name}
-									data-item-image={image}>
+									<Button onClick={handleClose} className="gift-button buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price={props.items[index].cost} data-item-url="/" data-item-name={props.name}
+									data-item-image={props.image}>
 										Add to Basket
 									</Button>
 								</Col>
@@ -93,8 +75,8 @@ function GalleryCard(props) {
 											</select>
 										</Col>
 									</Row>
-									<Button onClick={handleClose} className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="50.00" data-item-url="/" data-item-name={name}
-									data-item-image={image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print[-5.00]" data-item-custom1-value={material}
+									<Button onClick={handleClose} className="buy-button snipcart-add-item rounded-pill" data-item-id="1" data-item-price="50.00" data-item-url="/" data-item-name={props.name}
+									data-item-image={props.image} data-item-custom1-name="Material" data-item-custom1-options="Canvas|Print[-5.00]" data-item-custom1-value={material}
 									data-item-custom2-name="Size" data-item-custom2-options="Small|Medium[+10.00]|Large[+20.00]" data-item-custom2-value={size}>
 										Add to Basket
 									</Button>
